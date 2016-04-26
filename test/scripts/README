@@ -1,0 +1,6 @@
+from Root
+
+root [0] .L plotVector.C++
+root [0] .x plotVector.C(0)
+
+input int is the n'th reco event
