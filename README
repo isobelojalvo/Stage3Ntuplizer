@@ -1,6 +1,5 @@
 Current checkout instructions
 
-```
 
 #!/bin/bash
 scramv1 project CMSSW CMSSW_8_0_2
@@ -16,4 +15,3 @@ cd L1Trigger
 git clone git@github.com:SridharaDasu/L1TCaloSummary.git
 scram b -j 8
 
-```
