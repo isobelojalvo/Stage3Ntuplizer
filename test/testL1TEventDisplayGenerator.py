@@ -118,9 +118,9 @@ if options.data is True :
 else :
     process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
-process.out = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string("dumpout.root"),
-    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
+#process.out = cms.OutputModule("PoolOutputModule",
+#    fileName = cms.untracked.string("dumpout.root"),
+#    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
     #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
-)
-process.e = cms.EndPath(process.out)
+#)
+#process.e = cms.EndPath(process.out)

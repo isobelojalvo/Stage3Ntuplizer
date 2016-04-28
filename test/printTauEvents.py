@@ -76,7 +76,8 @@ process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
 process.load("L1Trigger.Stage3Ntuplizer.printTauEvents_cfi")
-process.printTauEvents.maxRecoPt = cms.double(35)
+process.printTauEvents.recoPtCut = cms.double(35)
+process.printTauEvents.maxRecoPt = cms.double(100)
 
 process.uct2016EmulatorDigis.useECALLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useHCALLUT = cms.bool(False)

@@ -23,7 +23,7 @@ options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.va
 options.parseArguments()
 
 if options.rates is False :
-    from L1Trigger.L1TNtuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
 
 def formatLumis(lumistring, run) :
     lumis = (lrange.split('-') for lrange in lumistring.split(','))
@@ -71,6 +71,13 @@ else :
     process.GlobalTag = GlobalTag(process.GlobalTag, '80X_mcRun2_asymptotic_v6', '')
 
 
+# To get L1 CaloParams
+process.load('L1Trigger.L1TCalorimeter.caloStage2Params_cfi')
+# To get CaloTPGTranscoder
+process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
+process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
+
+
 from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
 process = L1TEventSetupForHF1x1TPs(process)
 
@@ -87,25 +94,29 @@ process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
 process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
-
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
-process.load("L1Trigger.L1TNtuplizer.l1RatesEffStage3_cfi")
+process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
 
-process.uct2016EmulatorDigis.useECALLUT = cms.bool(False)
-process.uct2016EmulatorDigis.useHCALLUT = cms.bool(False)
+process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
+process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
 process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
+process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
+process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(0.3)
+
 #unpack the data or use the readout
-if options.data is False :
-    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("simHcalTriggerPrimitiveDigis")
-else :
+if options.data is True :
     process.uct2016EmulatorDigis.ecalToken = cms.InputTag("l1tCaloLayer1Digis")
     process.uct2016EmulatorDigis.hcalToken = cms.InputTag("l1tCaloLayer1Digis")
+else :
+    process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
+    process.l1NtupleProducer.hcalDigis = cms.InputTag("hcalDigis")
+    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
+    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("hcalDigis")
     
 if options.farmout is True :
     process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
@@ -130,10 +141,10 @@ process.TFileService = cms.Service(
     fileName = cms.string("l1TNtuple2.root")
     )
 
-if options.data is False :
-    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
-else :
+if options.data is True :
     process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+else :
+    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
 #process.p = cms.Path(process.L1TReEmul*process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
