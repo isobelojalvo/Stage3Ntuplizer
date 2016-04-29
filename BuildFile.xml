@@ -40,4 +40,3 @@
 <use name="JetMETCorrections/Algorithms"/>
 <use name="PhysicsTools/Utilities"/>
 <use name="HLTrigger/HLTcore"/>
-<use name="L1Trigger/Stage3Ntuplizer"/>
