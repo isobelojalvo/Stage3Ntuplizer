@@ -16,6 +16,7 @@
 #include "DataFormats/TauReco/interface/PFTau.h"
 #include "DataFormats/Common/interface/RefToPtr.h"
 
+
 #include "DataFormats/Math/interface/deltaR.h"
 #include <iostream>
 #include <fstream>
@@ -39,12 +40,16 @@ L1TRatesAndEff::L1TRatesAndEff( const ParameterSet & cfg ) :
   tauSrc_(consumes<vector<pat::Tau> >(cfg.getParameter<edm::InputTag>("recoTau"))),
   l1ExtraIsoTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraIsoTauSource"))),
   l1ExtraTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraTauSource"))),
+  l1Stage2TauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage2TauSource"))),
   regionSource_(consumes<vector <L1CaloRegion> >(cfg.getParameter<edm::InputTag>("UCTRegion")))
   {
 
     folderName_          = cfg.getUntrackedParameter<std::string>("folderName");
     recoPt_              = cfg.getParameter<double>("recoPtCut");
-    efficiencyTree = tfs_->make<TTree>("EfficiencyTree", "Efficiency Tree");
+    folder               = tfs_->mkdir(folderName_);
+    //folder->cd();
+    //efficiencyTree = tfs_->make<TTree>("EfficiencyTree", "Efficiency Tree");
+    efficiencyTree = folder.make<TTree>("EfficiencyTree", "Efficiency Tree");
     efficiencyTree->Branch("run",    &run,     "run/I");
     efficiencyTree->Branch("lumi",   &lumi,    "lumi/I");
     efficiencyTree->Branch("event",  &event,   "event/I");
@@ -105,39 +110,39 @@ L1TRatesAndEff::L1TRatesAndEff( const ParameterSet & cfg ) :
     efficiencyTree->Branch("l1IsoMatched",  &l1IsoMatched, "l1IsoMatched/I");
     efficiencyTree->Branch("l1RlxMatched",  &l1RlxMatched, "l1RlxMatched/I");
 
-    nEvents     = tfs_->make<TH1F>( "nEvents"  , "nEvents", 2,  0., 1. );
+    nEvents     = folder.make<TH1F>( "nEvents"  , "nEvents", 2,  0., 1. );
     
-    isoTau_pt   = tfs_->make<TH1F>( "isoTau_pt"  , "p_{T}", 100,  0., 100. );
-    tau_pt      = tfs_->make<TH1F>( "tau_pt"  , "p_{t}", 100,  0., 100. );
+    isoTau_pt   = folder.make<TH1F>( "isoTau_pt"  , "p_{T}", 100,  0., 100. );
+    tau_pt      = folder.make<TH1F>( "tau_pt"  , "p_{t}", 100,  0., 100. );
 
-    isoTau_eta   = tfs_->make<TH1F>( "isoTau_eta"  , "#eta", 100,  -3, 3 );
-    tau_eta      = tfs_->make<TH1F>( "tau_eta"  , "#eta", 100,  -3, 3 );
+    isoTau_eta   = folder.make<TH1F>( "isoTau_eta"  , "#eta", 100,  -3, 3 );
+    tau_eta      = folder.make<TH1F>( "tau_eta"  , "#eta", 100,  -3, 3 );
 
-    isoTau_phi   = tfs_->make<TH1F>( "isoTau_phi"  , "#phi", 100,  -4, 4 );
-    tau_phi      = tfs_->make<TH1F>( "tau_phi"  , "#phi", 100,  -4, 4 );
+    isoTau_phi   = folder.make<TH1F>( "isoTau_phi"  , "#phi", 100,  -4, 4 );
+    tau_phi      = folder.make<TH1F>( "tau_phi"  , "#phi", 100,  -4, 4 );
 
-    tau_pt_diTau         = tfs_->make<TH1F>( "tau_pt_diTau"         , "p_{t}", 150,  0., 150. );    
-    tau_pt_diTau_eta2p4  = tfs_->make<TH1F>( "tau_pt_diTau_eta2p4"  , "p_{t}", 150,  0., 150. );    
-    tau_pt_diTau_eta2p1  = tfs_->make<TH1F>( "tau_pt_diTau_eta2p1"  , "p_{t}", 150,  0., 150. );    
+    tau_pt_diTau         = folder.make<TH1F>( "tau_pt_diTau"         , "p_{t}", 150,  0., 150. );    
+    tau_pt_diTau_eta2p4  = folder.make<TH1F>( "tau_pt_diTau_eta2p4"  , "p_{t}", 150,  0., 150. );    
+    tau_pt_diTau_eta2p1  = folder.make<TH1F>( "tau_pt_diTau_eta2p1"  , "p_{t}", 150,  0., 150. );    
 
-    isoTau_pt_diTau         = tfs_->make<TH1F>( "isoTau_pt_diTau"         , "p_{t}", 150,  0., 150. );    
-    isoTau_pt_diTau_eta2p4  = tfs_->make<TH1F>( "isoTau_pt_diTau_eta2p4"  , "p_{t}", 150,  0., 150. );    
-    isoTau_pt_diTau_eta2p1  = tfs_->make<TH1F>( "isoTau_pt_diTau_eta2p1"  , "p_{t}", 150,  0., 150. );    
+    isoTau_pt_diTau         = folder.make<TH1F>( "isoTau_pt_diTau"         , "p_{t}", 150,  0., 150. );    
+    isoTau_pt_diTau_eta2p4  = folder.make<TH1F>( "isoTau_pt_diTau_eta2p4"  , "p_{t}", 150,  0., 150. );    
+    isoTau_pt_diTau_eta2p1  = folder.make<TH1F>( "isoTau_pt_diTau_eta2p1"  , "p_{t}", 150,  0., 150. );    
 
-    recoTau_pt   = tfs_->make<TH1F>( "recoTau_pt"  , "p_{t}", 100,  0., 100. );
-    recoTau_eta  = tfs_->make<TH1F>( "recoTau_eta"  , "eta", 100,  -3, 3. );
-    recoTau_phi  = tfs_->make<TH1F>( "recoTau_phi"  , "phi", 100,  -4, 4. );
+    recoTau_pt   = folder.make<TH1F>( "recoTau_pt"  , "p_{t}", 100,  0., 100. );
+    recoTau_eta  = folder.make<TH1F>( "recoTau_eta"  , "eta", 100,  -3, 3. );
+    recoTau_phi  = folder.make<TH1F>( "recoTau_phi"  , "phi", 100,  -4, 4. );
 
-    regionHitEta   = tfs_->make<TH1F>( "regionHit_eta"  , "eta", 16, 1, 16. );
-    regionHitPhi   = tfs_->make<TH1F>( "regionHit_phi"  , "phi", 16, 1, 16. );
-    regionTotal   = tfs_->make<TH1F>( "regionHit_total"  , "fullmap", 16, 1, 16. );
+    regionHitEta   = folder.make<TH1F>( "regionHit_eta"  , "eta", 16, 1, 16. );
+    regionHitPhi   = folder.make<TH1F>( "regionHit_phi"  , "phi", 16, 1, 16. );
+    regionTotal   = folder.make<TH1F>( "regionHit_total"  , "fullmap", 16, 1, 16. );
 
-    regionEta   = tfs_->make<TH1F>( "region_eta"  , "eta", 22, 1, 22. );
-    regionPhi   = tfs_->make<TH1F>( "region_phi"  , "phi", 72, 1, 72. );
-    regionPt   = tfs_->make<TH1F>( "region_pt"  , "pt", 100, 0, 100. );
+    regionEta   = folder.make<TH1F>( "region_eta"  , "eta", 22, 1, 22. );
+    regionPhi   = folder.make<TH1F>( "region_phi"  , "phi", 72, 1, 72. );
+    regionPt   = folder.make<TH1F>( "region_pt"  , "pt", 100, 0, 100. );
 
-    regionEtaFine   = tfs_->make<TH1F>( "region_eta_Fine"  , "eta", 88, 1, 88. );
-    regionPhiFine   = tfs_->make<TH1F>( "region_phi_Fine"  , "phi", 72, 1, 72. );
+    regionEtaFine   = folder.make<TH1F>( "region_eta_Fine"  , "eta", 88, 1, 88. );
+    regionPhiFine   = folder.make<TH1F>( "region_phi_Fine"  , "phi", 72, 1, 72. );
 
   }
 
@@ -165,6 +170,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
    
    edm::Handle < L1GctJetCandCollection > l1IsoTauJets;
    edm::Handle < L1GctJetCandCollection > l1TauJets;
+   edm::Handle < BXVector<l1t::Tau> > stage2Taus;
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraIsoTaus;
@@ -216,29 +222,44 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
   else
     std::cout<<"Error getting reco taus"<<std::endl;
 
-
+  ////
   vector<l1extra::L1JetParticle> rlxTauSorted;
   vector<l1extra::L1JetParticle> rlxTauSortedEtaRestricted2p1;
   vector<l1extra::L1JetParticle> rlxTauSortedEtaRestricted2p4;
   if(evt.getByToken(l1ExtraTauSource_, l1ExtraTaus)){
+    std::cout<<"found stage 3 taus"<<std::endl;
     for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = l1ExtraTaus->begin(); rlxTau != l1ExtraTaus->end(); rlxTau++ ){
       rlxTauSorted.push_back(*rlxTau);
       if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(*rlxTau);
       if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(*rlxTau);
     }
   }
+  else if(evt.getByToken(l1Stage2TauSource_, stage2Taus)){
+    std::cout<<"found stage 2 taus size: "<< stage2Taus->size() <<std::endl;
+    for(BXVector<l1t::Tau>::const_iterator rlxTau = stage2Taus->begin(); rlxTau != stage2Taus->end(); rlxTau++ ) {
+      //make this int l1extra::L1JetParticle
+      if(rlxTau->hwIso() > 0){
+	std::cout<<"rlxTau Pt "<<rlxTau->pt()<<" eta: "<<rlxTau->eta()<<" phi: "<<rlxTau->phi()<<std::endl;
+	l1extra::L1JetParticle tempJet(rlxTau->p4());
+	rlxTauSorted.push_back(tempJet);
+	if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(tempJet);
+      }
+    }
+  }
+  
   std::sort(rlxTauSorted.begin(),rlxTauSorted.end(),compareByPt);
   std::sort(rlxTauSortedEtaRestricted2p4.begin(),rlxTauSortedEtaRestricted2p4.end(),compareByPt);
   std::sort(rlxTauSortedEtaRestricted2p1.begin(),rlxTauSortedEtaRestricted2p1.end(),compareByPt);
-
   std::cout<<"making taus"<<std::endl;
+
   //Begin Making Rate Plots
-  for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = rlxTauSorted.begin(); rlxTau != rlxTauSorted.end(); rlxTau++ ) {
-    if( rlxTau->pt() > 150 )
+  for( auto rlxTau : rlxTauSorted ) {
+    if( rlxTau.pt() > 150 )
       tau_pt->Fill( 150 );
-    else tau_pt->Fill( rlxTau->pt() );
-    tau_eta->Fill( rlxTau->eta() );
-    tau_phi->Fill( rlxTau->phi() );
+    else tau_pt->Fill( rlxTau.pt() );
+    tau_eta->Fill( rlxTau.eta() );
+    tau_phi->Fill( rlxTau.phi() );
     //std::cout<<"rlx tau pt "<< rlxTau->pt() << " rlx tau eta "<< rlxTau->eta()<<" rlx tau phi "<< rlxTau->phi()<<std::endl;
   }
 
@@ -259,7 +280,20 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       if(abs(isoTau->eta()) < 2.4) isoTauSortedEtaRestricted2p4.push_back(*isoTau);
       if(abs(isoTau->eta()) < 2.1) isoTauSortedEtaRestricted2p1.push_back(*isoTau);
     }
+  }//in case we're looking at stage 2
+  else if(evt.getByToken(l1Stage2TauSource_, stage2Taus)){
+    for(BXVector<l1t::Tau>::const_iterator isoTau = stage2Taus->begin(); isoTau != stage2Taus->end(); isoTau++ ) {
+      //make this int l1extra::L1JetParticle
+      if(isoTau->hwIso() < 1){
+	std::cout<<"isoTau Pt "<<isoTau->pt()<<" eta: "<<isoTau->eta()<<" phi: "<<isoTau->phi()<<std::endl;
+	l1extra::L1JetParticle tempJet(isoTau->p4());
+	isoTauSorted.push_back(tempJet);
+	if(abs(isoTau->eta()) < 2.4) isoTauSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(isoTau->eta()) < 2.1) isoTauSortedEtaRestricted2p1.push_back(tempJet);
+      }
+    }
   }
+
   std::sort(isoTauSorted.begin(),isoTauSorted.end(),compareByPt);
   std::sort(isoTauSortedEtaRestricted2p4.begin(),isoTauSortedEtaRestricted2p4.end(),compareByPt);
   std::sort(isoTauSortedEtaRestricted2p1.begin(),isoTauSortedEtaRestricted2p1.end(),compareByPt);

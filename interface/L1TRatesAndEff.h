@@ -42,6 +42,10 @@
 #include "DataFormats/PatCandidates/interface/Tau.h"
 //#include "L1Trigger/L1TCaloLayer1/src/L1UCTCollections.h"
 
+#include "DataFormats/L1Trigger/interface/BXVector.h"
+#include "DataFormats/L1Trigger/interface/Tau.h"
+
+
 #include <memory>
 #include <math.h>
 #include <vector>
@@ -106,6 +110,7 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
   TH1F* regionHitEta;
   TH1F* regionHitPhi;
   TTree* efficiencyTree;
+  TFileDirectory folder;
 
   int run, lumi, event;
   double isoTauPt, rlxTauPt, isoTauEta, rlxTauEta, isoTauPhi, rlxTauPhi;
@@ -166,6 +171,7 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
   //edm::EDGetTokenT<L1GctJetCandCollection> gctTauJetsSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraIsoTauSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraTauSource_;
+  edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage2TauSource_;
   edm::EDGetTokenT<vector <L1CaloRegion> > regionSource_;
 
   std::string folderName_;
