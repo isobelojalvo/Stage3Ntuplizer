@@ -374,17 +374,17 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
       
       
-      for(int k = 0; k<isoTauSorted.size(); k++){
-	double dR = deltaR( recoTau.p4(), isoTau.at(k).p4());
+      for(uint32_t k = 0; k<isoTauSorted.size(); k++){
+	double dR = deltaR( recoTau.p4(), isoTauSorted.at(k).p4());
 	if( dR < deltaR_){
-	  isoTauPt  = isoTau.at(k).pt();
-	  isoTauEta = isoTau.at(k).eta();
-	  isoTauPhi = isoTau.at(k).phi();
+	  isoTauPt  = isoTauSorted.at(k).pt();
+	  isoTauEta = isoTauSorted.at(k).eta();
+	  isoTauPhi = isoTauSorted.at(k).phi();
 	  l1IsoMatched = 1;
 	  break;
 	}
       }
-      for(int k = 0; k<rlxTauSorted.size(); k++){
+      for(uint32_t k = 0; k<rlxTauSorted.size(); k++){
 	double dR = deltaR( recoTau.p4(), rlxTauSorted.at(k).p4());
 	if(dR < deltaR_){
 	  rlxTauPt  = rlxTauSorted.at(k).pt();
