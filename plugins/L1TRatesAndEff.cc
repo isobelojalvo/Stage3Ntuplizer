@@ -358,7 +358,6 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     for(unsigned int i = 0; i < goodTaus.size(); i++){
       
       pat::Tau recoTau = goodTaus.at(i);
-      
       tauEtaEcalEnt =-999, tauPhiEcalEnt =-999;
       decayMode = -999, jetEt = -999, jetEta = -999, jetPhi = -999, rawEcal = 0, rawHcal = 0,  ecal = 0, hcal = 0;
       
@@ -374,23 +373,17 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       isoTauPt = 0; isoTauEta = -99; isoTauPhi = -99; 
       rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
       
-      if(evt.getByToken(l1ExtraIsoTauSource_ , l1ExtraIsoTaus)){
-	for( vector<l1extra::L1JetParticle>::const_iterator isoTau = l1ExtraIsoTaus->begin();  isoTau != l1ExtraIsoTaus->end();  ++isoTau ) {
-	  double dR = deltaR( recoTau.p4(), isoTau->p4());
-	  if( dR < deltaR_){
-	    isoTauPt  = isoTau->pt();
-	    isoTauEta = isoTau->eta();
-	    isoTauPhi = isoTau->phi();
-	    l1IsoMatched = 1;
-	    break;
-	  }
+      
+      for(int k = 0; k<isoTauSorted.size(); k++){
+	double dR = deltaR( recoTau.p4(), isoTau.at(k).p4());
+	if( dR < deltaR_){
+	  isoTauPt  = isoTau.at(k).pt();
+	  isoTauEta = isoTau.at(k).eta();
+	  isoTauPhi = isoTau.at(k).phi();
+	  l1IsoMatched = 1;
+	  break;
 	}
       }
-      else
-	std::cout<<"ERROR GETTING L1EXTRA ISO TAUS"<<std::endl;
-      
-      //if(evt.getByToken(l1ExtraTauSource_, l1ExtraTaus)){
-      //for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = rlxTauSorted->begin(); rlxTauSorted != rlxTauSorted->end(); rlxTau++ ) {
       for(int k = 0; k<rlxTauSorted.size(); k++){
 	double dR = deltaR( recoTau.p4(), rlxTauSorted.at(k).p4());
 	if(dR < deltaR_){
@@ -398,19 +391,14 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
 	  rlxTauEta = rlxTauSorted.at(k).eta();
 	  rlxTauPhi = rlxTauSorted.at(k).phi();
 	  l1RlxMatched = 1;
-	  //std::cout<<"Matched!! rlx tau pt "<< rlxTau->pt() << " eta "<< rlxTau->eta()<<" phi "<< rlxTau->phi()<<std::endl;
 	  break;
 	}
-	  //}
       }
-      //else
-      //std::cout<<"ERROR GETTING L1EXTRA RLX TAUS"<<std::endl;
-    
+      
       if(l1RlxMatched==0)
 	std::cout<<"Not Matched!"<<std::endl;
       
       efficiencyTree->Fill();
-
     }
     
   }
