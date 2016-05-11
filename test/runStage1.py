@@ -1,14 +1,16 @@
+# Auto generated configuration file
+# using: 
+# Revision: 1.19 
+# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
+# with command line options: STAGE1 --python_filename=runStage1.py -s RAW2DIGI --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --datatier FEVT --era=Run2_25ns --conditions=auto:run2_data --data --no_exec -n 1000 --filein=/store/data/Run2015D/JetHT/RAW/v1/000/260/627/00000/0021ABE7-3282-E511-B229-02163E012312.root
 import os
 import FWCore.ParameterSet.Config as cms
-
 from Configuration.StandardSequences.Eras import eras
-
-process = cms.Process("L1TCaloSummaryTest")
+process = cms.Process('RAW2DIGI',eras.Run2_25ns)
 
 import EventFilter.L1TXRawToDigi.util as util
 
 from FWCore.ParameterSet.VarParsing import VarParsing
-
 
 options = VarParsing()
 options.register('runNumber', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, 'Run to analyze')
@@ -20,7 +22,6 @@ options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsin
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
-options.register('tauIsolationFactor', 0.3, VarParsing.multiplicity.singleton, VarParsing.varType.float, 'tau relative isolation factor')
 options.parseArguments()
 
 if options.rates is False :
@@ -45,25 +46,16 @@ if options.farmout is False :
 
 print 'Ok, time to analyze'
 
-#secondaryMap = {
-#    "root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/MINIAOD/05Oct2015-v1/10000/04EDCDA3-916F-E511-AD11-0025905938B4.root": [
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/28774BB9-EF66-E511-A328-02163E011CC3.root',
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/8A42A2DA-EF66-E511-AC62-02163E012988.root',
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/C24B52CB-EF66-E511-969B-02163E0119F6.root']
-#}
-
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
-process.load('SimGeneral.MixingModule.mixNoPU_cfi')
-process.load('Configuration.Geometry.GeometryExtended2016Reco_cff')
+process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-
 
 from Configuration.AlCa.GlobalTag import GlobalTag
 if options.data is True :
@@ -71,16 +63,43 @@ if options.data is True :
 else :
     process.GlobalTag = GlobalTag(process.GlobalTag, '80X_mcRun2_asymptotic_v6', '')
 
+# Production Info
+process.configurationMetadata = cms.untracked.PSet(
+    annotation = cms.untracked.string('STAGE1 nevts:1000'),
+    name = cms.untracked.string('Applications'),
+    version = cms.untracked.string('$Revision: 1.19 $')
+)
 
-# To get L1 CaloParams
-process.load('L1Trigger.L1TCalorimeter.caloStage2Params_cfi')
-# To get CaloTPGTranscoder
-process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
-process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
+# Output definition
+
+#process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
+#    dataset = cms.untracked.PSet(
+#        dataTier = cms.untracked.string('FEVT'),
+#        filterName = cms.untracked.string('')
+#    ),
+#    eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
+#    fileName = cms.untracked.string('STAGE1_RAW2DIGI.root'),
+#    outputCommands = process.RECOSIMEventContent.outputCommands,
+#    splitLevel = cms.untracked.int32(0)
+#)
+
+# Additional output definition
 
 
-from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
-process = L1TEventSetupForHF1x1TPs(process)
+# Path and EndPath definitions
+#process.raw2digi_step = cms.Path(process.RawToDigi)
+#process.endjob_step = cms.EndPath(process.endOfProcess)
+#process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
+
+# Schedule definition
+#process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.RECOSIMoutput_step)
+
+# customisation of the process.
+
+# Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW 
+
+#call to customisation function L1TReEmulFromRAW imported from L1Trigger.Configuration.customiseReEmul
 
 process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
@@ -89,41 +108,30 @@ process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(
     cms.InputTag('hcalDigis'),
     cms.InputTag('hcalDigis')
     )
-process.L1TReEmul = cms.Sequence(process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator)
+#process.L1TReEmul = cms.Sequence(process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator)
+process.simDtTriggerPrimitiveDigis.digiTag = 'muonDTDigis'  
+process.simCscTriggerPrimitiveDigis.CSCComparatorDigiProducer = cms.InputTag( 'muonCSCDigis', 'MuonCSCComparatorDigi')
+process.simCscTriggerPrimitiveDigis.CSCWireDigiProducer       = cms.InputTag( 'muonCSCDigis', 'MuonCSCWireDigi' )  
 
-process.load('L1Trigger.Configuration.SimL1Emulator_cff')
-process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
-process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
-process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
+####
+process.simRctDigis.ecalDigis = cms.VInputTag( cms.InputTag( 'ecalDigis:EcalTriggerPrimitives' ) )
+process.simRctDigis.hcalDigis = cms.VInputTag('simHcalTriggerPrimitiveDigis')
+process.simRpcTriggerDigis.label         = 'muonRPCDigis'
+process.simRpcTechTrigDigis.RPCDigiLabel  = 'muonRPCDigis'
 
-process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
+process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2_cfi")
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.stage2TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1IsoTauSource = cms.InputTag("garbage")
+process.l1NtupleProducer.folderName = cms.untracked.string("Stage2Taus")
+#process.l1NtupleProducer.stage2TauSource = cms.InputTag("simCaloStage1FinalDigis","rlxTaus")
 
-process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
-process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
-process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
-process.uct2016EmulatorDigis.useLSB = cms.bool(True)
-process.uct2016EmulatorDigis.verbose = cms.bool(False)
-process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
-process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-print "tau Isolation Factor: " 
-print options.tauIsolationFactor
+#process.L1TReEmulPath = cms.Path(process.L1TReEmul)
 
-#unpack the data or use the readout
-if options.data is True :
-    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("l1tCaloLayer1Digis")
-    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("l1tCaloLayer1Digis")
-else :
-    process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-    process.l1NtupleProducer.hcalDigis = cms.InputTag("hcalDigis")
-    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("hcalDigis")
-    
+#process = L1TReEmulFromRAW(process)
+
+# End of customisation functions
+
 if options.farmout is True :
     process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
@@ -147,14 +155,16 @@ process.TFileService = cms.Service(
     fileName = cms.string("l1TNtuple2.root")
     )
 
-if options.data is True :
-    process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
-else :
-    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+#if options.data is True :
+#    process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+#else :
+#    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+process.p = cms.Path(process.RawToDigi * process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator * process.l1NtupleProducer)
 
-#process.p = cms.Path(process.L1TReEmul*process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
-#dump_file = open('dump.py','w')
-#dump_file.write(process.dumpPython())
-
+#process.out = cms.OutputModule("PoolOutputModule",
+#    fileName = cms.untracked.string("l1TFullEvent.root"),
+#    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
+##    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
+#)
 #process.e = cms.EndPath(process.out)

@@ -20,7 +20,6 @@ options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsin
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
-options.register('tauIsolationFactor', 0.3, VarParsing.multiplicity.singleton, VarParsing.varType.float, 'tau relative isolation factor')
 options.parseArguments()
 
 if options.rates is False :
@@ -79,11 +78,12 @@ process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 
 
-from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
-process = L1TEventSetupForHF1x1TPs(process)
+#from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
+#process = L1TEventSetupForHF1x1TPs(process)
 
 process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
+
 process.simEcalTriggerPrimitiveDigis.Label = 'ecalDigis'
 process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(
     cms.InputTag('hcalDigis'),
@@ -97,12 +97,9 @@ process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
-process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
+process.load("L1Trigger.Stage3Ntuplizer.l1TriggerTestArea_cfi")
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.stage2TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1IsoTauSource = cms.InputTag("garbage")
 
 process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
 process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
@@ -110,9 +107,7 @@ process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
 process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
-process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-print "tau Isolation Factor: " 
-print options.tauIsolationFactor
+process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(0.3)
 
 #unpack the data or use the readout
 if options.data is True :
