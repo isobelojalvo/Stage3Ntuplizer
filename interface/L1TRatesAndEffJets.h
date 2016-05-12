@@ -40,6 +40,7 @@
 #include "DataFormats/L1Trigger/interface/L1JetParticle.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/PatCandidates/interface/Tau.h"
+#include "DataFormats/PatCandidates/interface/Jet.h"
 //#include "L1Trigger/L1TCaloLayer1/src/L1UCTCollections.h"
 
 #include "DataFormats/L1Trigger/interface/BXVector.h"
@@ -102,6 +103,7 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   int run, lumi, event;
   double jetPt, jetEta, jetPhi;
   double recoPt, recoEta, recoPhi;
+  double nvtx;
   int l1Matched;
 
  protected:
