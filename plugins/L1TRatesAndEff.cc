@@ -402,6 +402,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       isoTauPt = 0; isoTauEta = -99; isoTauPhi = -99; 
       rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
       
+      
       for(uint32_t k = 0; k<isoTauSorted.size(); k++){
 	double dR = deltaR( recoTau.p4(), isoTauSorted.at(k).p4());
 	if( dR < deltaR_){
