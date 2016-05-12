@@ -20,11 +20,15 @@ options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsin
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
+options.register('jets',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between jets and taus')
 options.register('tauIsolationFactor', 0.3, VarParsing.multiplicity.singleton, VarParsing.varType.float, 'tau relative isolation factor')
 options.parseArguments()
 
 if options.rates is False :
-    from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    if options.jets is False :
+        from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    else :
+        from L1Trigger.Stage3Ntuplizer.QCD_PT_15to3000_cfi import *
 
 def formatLumis(lumistring, run) :
     lumis = (lrange.split('-') for lrange in lumistring.split(','))
@@ -97,12 +101,15 @@ process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
-process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
-process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.stage2TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1IsoTauSource = cms.InputTag("garbage")
+if options.jets is True :
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3Jets_cfi")
+else :
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
+    process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
+    process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
+    process.l1NtupleProducer.stage2TauSource = cms.InputTag("garbage")
+    process.l1NtupleProducer.stage1TauSource = cms.InputTag("garbage")
+    process.l1NtupleProducer.stage1IsoTauSource = cms.InputTag("garbage")
 
 process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
 process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
