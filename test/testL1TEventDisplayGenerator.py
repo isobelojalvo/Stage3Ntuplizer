@@ -116,7 +116,7 @@ process.TFileService = cms.Service(
 if options.data is True :
     process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 else :
-    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.l1NtupleProducer)
+    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
 #process.out = cms.OutputModule("PoolOutputModule",
 #    fileName = cms.untracked.string("dumpout.root"),

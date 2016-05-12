@@ -14,7 +14,7 @@ l1NtupleProducer = cms.EDAnalyzer("L1TEventDisplayGenerator",
                                   #remove all possible muons
                                   recoTauDiscriminatorIso = cms.InputTag("hpsPFTauDiscriminationByLooseIsolation"),
                                   recoTauDiscriminatorMu  = cms.InputTag("hpsPFTauDiscriminationByTightMuonRejection3"),
-                                  vertices                = cms.InputTag("offlinePrimaryVertices"),
+                                  vertices                = cms.InputTag("offlineSlimmedPrimaryVertices"),
                                   folderName              = cms.untracked.string("firstFolder"),
                                   recoPtCut               = cms.double(4),
                                   packedPfCands           = cms.InputTag("packedPFCandidates"),

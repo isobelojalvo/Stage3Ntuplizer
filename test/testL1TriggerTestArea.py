@@ -9,6 +9,7 @@ import EventFilter.L1TXRawToDigi.util as util
 
 from FWCore.ParameterSet.VarParsing import VarParsing
 
+
 options = VarParsing()
 options.register('runNumber', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, 'Run to analyze')
 options.register('lumis', '1-max', VarParsing.multiplicity.singleton, VarParsing.varType.string, 'Lumis')
@@ -19,7 +20,6 @@ options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsin
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
-options.register('tauIsolationFactor', 0.3, VarParsing.multiplicity.singleton, VarParsing.varType.float, 'tau relative isolation factor')
 options.parseArguments()
 
 if options.rates is False :
@@ -43,6 +43,13 @@ if options.farmout is False :
             raise Exception('No files found for dataset %s run %d' % (options.dataStream, options.runNumber))
 
 print 'Ok, time to analyze'
+
+#secondaryMap = {
+#    "root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/MINIAOD/05Oct2015-v1/10000/04EDCDA3-916F-E511-AD11-0025905938B4.root": [
+#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/28774BB9-EF66-E511-A328-02163E011CC3.root',
+#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/8A42A2DA-EF66-E511-AC62-02163E012988.root',
+#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/C24B52CB-EF66-E511-969B-02163E0119F6.root']
+#}
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -71,11 +78,12 @@ process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 
 
-from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
-process = L1TEventSetupForHF1x1TPs(process)
+#from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
+#process = L1TEventSetupForHF1x1TPs(process)
 
 process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
+
 process.simEcalTriggerPrimitiveDigis.Label = 'ecalDigis'
 process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(
     cms.InputTag('hcalDigis'),
@@ -89,12 +97,9 @@ process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
-process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3_cfi")
+process.load("L1Trigger.Stage3Ntuplizer.l1TriggerTestArea_cfi")
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.stage2TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1TauSource = cms.InputTag("garbage")
-process.l1NtupleProducer.stage1IsoTauSource = cms.InputTag("garbage")
 
 process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
 process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
@@ -102,9 +107,7 @@ process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
 process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
-process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-print "tau Isolation Factor: " 
-print options.tauIsolationFactor
+process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(0.3)
 
 #unpack the data or use the readout
 if options.data is True :

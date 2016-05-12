@@ -25,7 +25,6 @@ using namespace edm;
 using std::cout;
 using std::endl;
 using std::vector;
-//vector<L1CaloRegion>                  "l1tCaloLayer1Digis"
 
 bool compareByPt (l1extra::L1JetParticle i,l1extra::L1JetParticle j) { return(i.pt()>j.pt()); };
 
@@ -41,6 +40,8 @@ L1TRatesAndEff::L1TRatesAndEff( const ParameterSet & cfg ) :
   l1ExtraIsoTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraIsoTauSource"))),
   l1ExtraTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraTauSource"))),
   l1Stage2TauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage2TauSource"))),
+  l1Stage1TauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage1TauSource"))),
+  l1Stage1IsoTauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage1IsoTauSource"))),
   regionSource_(consumes<vector <L1CaloRegion> >(cfg.getParameter<edm::InputTag>("UCTRegion")))
   {
 
@@ -53,7 +54,7 @@ L1TRatesAndEff::L1TRatesAndEff( const ParameterSet & cfg ) :
     efficiencyTree->Branch("run",    &run,     "run/I");
     efficiencyTree->Branch("lumi",   &lumi,    "lumi/I");
     efficiencyTree->Branch("event",  &event,   "event/I");
-    efficiencyTree->Branch("nvtx",          &nvtx,         "nvtx/I");
+    efficiencyTree->Branch("nvtx",          &nvtx,         "nvtx/D");
     
     efficiencyTree->Branch("recoPt",    &recoPt,   "recoPt/D");
     efficiencyTree->Branch("decayMode", &decayMode,   "decayMode/I");
@@ -158,11 +159,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
    run = evt.id().run();
    lumi = evt.id().luminosityBlock();
    event = evt.id().event();
-   edm::Handle<reco::VertexCollection> vertices;
-   if(evt.getByToken(vtxLabel_, vertices)){
-     nvtx = vertices->size();
-   }
-   
+   edm::Handle<reco::VertexCollection> vertices;   
    Handle<L1CaloRegionCollection> regions;
    
    edm::Handle<reco::PFTauDiscriminator> discriminatorIso;
@@ -171,6 +168,8 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
    edm::Handle < L1GctJetCandCollection > l1IsoTauJets;
    edm::Handle < L1GctJetCandCollection > l1TauJets;
    edm::Handle < BXVector<l1t::Tau> > stage2Taus;
+   edm::Handle < BXVector<l1t::Tau> > stage1Taus;
+   edm::Handle < BXVector<l1t::Tau> > stage1IsoTaus;
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraIsoTaus;
@@ -227,7 +226,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
   vector<l1extra::L1JetParticle> rlxTauSortedEtaRestricted2p1;
   vector<l1extra::L1JetParticle> rlxTauSortedEtaRestricted2p4;
   if(evt.getByToken(l1ExtraTauSource_, l1ExtraTaus)){
-    std::cout<<"found stage 3 taus"<<std::endl;
+    std::cout<<"found rlx stage 3 taus"<<std::endl;
     for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = l1ExtraTaus->begin(); rlxTau != l1ExtraTaus->end(); rlxTau++ ){
       rlxTauSorted.push_back(*rlxTau);
       if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(*rlxTau);
@@ -235,7 +234,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     }
   }
   else if(evt.getByToken(l1Stage2TauSource_, stage2Taus)){
-    std::cout<<"found stage 2 taus size: "<< stage2Taus->size() <<std::endl;
+    std::cout<<"found rlx stage 2 taus size: "<< stage2Taus->size() <<std::endl;
     for(BXVector<l1t::Tau>::const_iterator rlxTau = stage2Taus->begin(); rlxTau != stage2Taus->end(); rlxTau++ ) {
       //make this int l1extra::L1JetParticle
       if(rlxTau->hwIso() > 0){
@@ -247,6 +246,20 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       }
     }
   }
+  else if(evt.getByToken(l1Stage1TauSource_, stage1Taus)){
+    std::cout<<"found rlx stage 1 taus size: "<< stage1Taus->size() <<std::endl;
+    //std::cout<<"1. pt: "<< stage1Taus->at(0,0).pt()<<std::endl;
+    for(BXVector<l1t::Tau>::const_iterator rlxTau = stage1Taus->begin(); rlxTau != stage1Taus->end(); rlxTau++ ) {
+      //make this int l1extra::L1JetParticle
+      //std::cout<<"rlxTau Pt "<<rlxTau->pt()<<" eta: "<<rlxTau->eta()<<" phi: "<<rlxTau->phi()<<std::endl;
+      l1extra::L1JetParticle tempJet(rlxTau->p4());
+      rlxTauSorted.push_back(tempJet);
+      if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(tempJet);
+      if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(tempJet);
+    }
+  }
+  //else
+  //std::cout<<"did not get relaxed taus"<<std::endl;
   
   std::sort(rlxTauSorted.begin(),rlxTauSorted.end(),compareByPt);
   std::sort(rlxTauSortedEtaRestricted2p4.begin(),rlxTauSortedEtaRestricted2p4.end(),compareByPt);
@@ -285,12 +298,23 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     for(BXVector<l1t::Tau>::const_iterator isoTau = stage2Taus->begin(); isoTau != stage2Taus->end(); isoTau++ ) {
       //make this int l1extra::L1JetParticle
       if(isoTau->hwIso() < 1){
-	std::cout<<"isoTau Pt "<<isoTau->pt()<<" eta: "<<isoTau->eta()<<" phi: "<<isoTau->phi()<<std::endl;
+	//std::cout<<"isoTau Pt "<<isoTau->pt()<<" eta: "<<isoTau->eta()<<" phi: "<<isoTau->phi()<<std::endl;
 	l1extra::L1JetParticle tempJet(isoTau->p4());
 	isoTauSorted.push_back(tempJet);
 	if(abs(isoTau->eta()) < 2.4) isoTauSortedEtaRestricted2p4.push_back(tempJet);
 	if(abs(isoTau->eta()) < 2.1) isoTauSortedEtaRestricted2p1.push_back(tempJet);
       }
+    }
+  }
+  else if(evt.getByToken(l1Stage1IsoTauSource_, stage1IsoTaus)){
+    std::cout<<"found stage 1 taus size: "<< stage1IsoTaus->size() <<std::endl;
+    for(BXVector<l1t::Tau>::const_iterator isoTau = stage1IsoTaus->begin(); isoTau != stage1IsoTaus->end(); isoTau++ ) {
+      //make this int l1extra::L1JetParticle
+      std::cout<<"isoTau Pt "<<isoTau->pt()<<" eta: "<<isoTau->eta()<<" phi: "<<isoTau->phi()<<std::endl;
+      l1extra::L1JetParticle tempJet(isoTau->p4());
+      isoTauSorted.push_back(tempJet);
+      if(abs(isoTau->eta()) < 2.4) isoTauSortedEtaRestricted2p4.push_back(tempJet);
+      if(abs(isoTau->eta()) < 2.1) isoTauSortedEtaRestricted2p1.push_back(tempJet);
     }
   }
 
@@ -356,7 +380,12 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     std::cout<<"Finished initializing the tpg maps"<<std::endl;
     ////Make efficiencies
     for(unsigned int i = 0; i < goodTaus.size(); i++){
-      
+      nvtx = 0;
+      if(evt.getByToken(vtxLabel_, vertices)){
+	nvtx = (double)vertices->size();
+	//std::cout<<"nvtx "<<nvtx<<std::endl;
+      }
+
       pat::Tau recoTau = goodTaus.at(i);
       tauEtaEcalEnt =-999, tauPhiEcalEnt =-999;
       decayMode = -999, jetEt = -999, jetEta = -999, jetPhi = -999, rawEcal = 0, rawHcal = 0,  ecal = 0, hcal = 0;
@@ -397,7 +426,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       
       if(l1RlxMatched==0)
 	std::cout<<"Not Matched!"<<std::endl;
-      
+      std::cout<<"nvtx "<<nvtx<<std::endl;
       efficiencyTree->Fill();
     }
     

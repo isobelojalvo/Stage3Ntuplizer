@@ -1,5 +1,5 @@
-#ifndef L1TRatesAndEff_H
-#define L1TRatesAndEff_H
+#ifndef L1TRatesAndEffJets_H
+#define L1TRatesAndEffJets_H
 
 // system include files
 #include <memory>
@@ -64,77 +64,45 @@
 //
 using std::vector;
 
-class L1TRatesAndEff : public edm::EDAnalyzer {
+class L1TRatesAndEffJets : public edm::EDAnalyzer {
 
  public:
   
   // Constructor
-  L1TRatesAndEff(const edm::ParameterSet& ps);
+  L1TRatesAndEffJets(const edm::ParameterSet& ps);
   
   // Destructor
-  virtual ~L1TRatesAndEff();
+  virtual ~L1TRatesAndEffJets();
 
   edm::Service<TFileService> tfs_;
 
-  std::ofstream file0, file1, file10;
-
   TH1F* nEvents;
 
-  TH1F* isoTau_pt;
-  TH1F* isoTau_eta;
-  TH1F* isoTau_phi;
+  TH1F* jet_pt;
+  TH1F* jet_eta;
+  TH1F* jet_phi;
 
-  TH1F* tau_pt;
-  TH1F* tau_eta;
-  TH1F* tau_phi;
+  TH1F* jet_pt_jet1_eta2p4;
+  TH1F* jet_pt_jet2_eta2p4;
+  TH1F* jet_pt_jet3_eta2p4;
+  TH1F* jet_pt_jet4_eta2p4;
 
-  TH1F* tau_pt_diTau;
-  TH1F* tau_pt_diTau_eta2p4;
-  TH1F* tau_pt_diTau_eta2p1;
+  TH1F* jet_pt_jet1;
+  TH1F* jet_pt_jet2;
+  TH1F* jet_pt_jet3;
+  TH1F* jet_pt_jet4;
 
-  TH1F* isoTau_pt_diTau;
-  TH1F* isoTau_pt_diTau_eta2p4;
-  TH1F* isoTau_pt_diTau_eta2p1;
+  TH1F* recoJet_pt;
+  TH1F* recoJet_eta;
+  TH1F* recoJet_phi;
 
-  TH1F* recoTau_pt;
-  TH1F* recoTau_eta;
-  TH1F* recoTau_phi;
-
-  TH1F* regionEta;
-  TH1F* regionPhi;
-  TH1F* regionPt;
-  TH1F* regionEtaFine;
-  TH1F* regionPhiFine;
-  TH1F* regionTotal;
-
-  TH1F* regionHitEta;
-  TH1F* regionHitPhi;
   TTree* efficiencyTree;
   TFileDirectory folder;
 
   int run, lumi, event;
-  double isoTauPt, rlxTauPt, isoTauEta, rlxTauEta, isoTauPhi, rlxTauPhi;
+  double jetPt, jetEta, jetPhi;
   double recoPt, recoEta, recoPhi;
-  int l1RlxMatched, l1IsoMatched;
-  int decayMode;
-  double tauEtaEcalEnt,tauPhiEcalEnt,rawEcal, rawHcal, ecal, hcal, jetEt, jetEta, jetPhi, nvtx;
-  double max3ProngDeltaR, minProngPt, maxProngPt, midProngPt; int n3ProngCands;
-  double pfCandsEt, signalCandsEt, isoCandsEt;
-  double TPG2x2, TPGH2x2, TPGE2x2;
-  double TPG5x5, TPGH5x5, TPGE5x5;
-  double TPG6x6, TPGH6x6, TPGE6x6;
-  double TPG7x7, TPGH7x7, TPGE7x7;
-
-  void getThreeProngInfo(const pat::Tau & tau, double &maxDeltaR, double &minProngPt, double &midProngPt, double &maxProngPt, int &nCands);
-  void getRawEcalHcalEnergy(const pat::PackedCandidate pfCand, double &rawEcal, double &rawHcal, double &ecal, double &hcal);
-  double getPFCandsEt(const std::vector<pat::PackedCandidate> pfCands);
-  double getPFCandsEtEtaPhi(edm::Handle<std::vector<pat::PackedCandidate> >& pfCands, const pat::Tau &tau, double dR);
-  void initializeHCALTPGMap(const edm::Handle<HcalTrigPrimDigiCollection> hcal, const  edm::ESHandle<L1CaloHcalScale> hcalScale, double hTowerETMap[73][57], bool testMode = false);
-  void initializeECALTPGMap(edm::Handle<EcalTrigPrimDigiCollection> ecal, double eTowerETMap[73][57], bool testMode = false);
-  int get2x2TPGs(const int maxTPGPt_eta,const int maxTPGPt_phi, const double eTowerETMap[73][57], const double hTowerETMap[73][57], double &TPGe2x2_, double &TPGh2x2_ );
-  int get5x5TPGs(const int maxTPGPt_eta,const int maxTPGPt_phi, const double eTowerETMap[73][57], const double hTowerETMap[73][57], double &TPGe5x5_, double &TPGh5x5_ );
-  int get6x6TPGs(const int maxTPGPt_eta,const int maxTPGPt_phi, const double eTowerETMap[73][57], const double hTowerETMap[73][57], double &TPGe6x6_, double &TPGh6x6_ );
-  int get7x7TPGs(const int maxTPGPt_eta,const int maxTPGPt_phi, const double eTowerETMap[73][57], const double hTowerETMap[73][57], double &TPGe7x7_, double &TPGh7x7_ );
+  int l1Matched;
 
  protected:
   // Analyze
@@ -156,17 +124,14 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
   edm::InputTag rctSource_; 
 
   edm::EDGetTokenT<vector<pat::PackedCandidate> > pfCandsToken_;  
-  edm::EDGetTokenT<L1CaloRegionCollection> L1RegionCollection;
-  edm::EDGetTokenT<L1CaloEmCollection> L1EMCollection_;
   edm::EDGetTokenT<reco::VertexCollection> vertices_;
   edm::EDGetTokenT<EcalTrigPrimDigiCollection> ecalSrc_; 
   edm::EDGetTokenT<HcalTrigPrimDigiCollection> hcalSrc_;
   //edm::EDGetTokenT<double> recoPt_;
   //edm::EDGetTokenT<std::string> folderName_;
   edm::EDGetTokenT<reco::VertexCollection> vtxLabel_;
-  edm::EDGetTokenT<reco::PFTauDiscriminator> discriminatorMu_;
-  edm::EDGetTokenT<reco::PFTauDiscriminator> discriminatorIso_;
-  edm::EDGetTokenT<vector<pat::Tau> > tauSrc_;
+  edm::EDGetTokenT<vector<pat::Jet> > jetSrc_;
+  edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraJets_;
   //edm::EDGetTokenT<L1GctJetCandCollection> gctIsoTauJetsSource_;
   //edm::EDGetTokenT<L1GctJetCandCollection> gctTauJetsSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraIsoTauSource_;

@@ -12,6 +12,8 @@ options.register('runNumber', 0, VarParsing.multiplicity.singleton, VarParsing.v
 options.register('lumis', '1-max', VarParsing.multiplicity.singleton, VarParsing.varType.string, 'Lumis')
 options.register('dataStream', '/ExpressPhysics/Run2015D-Express-v4/FEVT', VarParsing.multiplicity.singleton, VarParsing.varType.string, 'Dataset to look for run in')
 options.register('inputFiles', [], VarParsing.multiplicity.list, VarParsing.varType.string, 'Manual file list input, will query DAS if empty')
+options.register('inputSecondaryFiles', [], VarParsing.multiplicity.list, VarParsing.varType.string, 'Manual file list input, will query DAS if empty')
+options.register('outputFileName', 'file', VarParsing.multiplicity.singleton, VarParsing.varType.string, 'Manual outputFile Name')
 options.register('inputFileList', '', VarParsing.multiplicity.singleton, VarParsing.varType.string, 'Manual file list input, will query DAS if empty')
 options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'Use ORCON for conditions.  This is necessary for very recent runs where conditions have not propogated to Frontier')
 options.parseArguments()
@@ -29,6 +31,14 @@ elif len(options.inputFileList) > 0 :
         inputFiles = list((line.strip() for line in f))
 else :
     inputFiles = cms.untracked.vstring(options.inputFiles)
+
+if len(options.inputSecondaryFiles) is 0 and options.inputFileList is '' :
+    inputSecondaryFiles = util.getFilesForRun(options.runNumber, options.dataStream)
+elif len(options.inputFileList) > 0 :
+    with open(options.inputFileList) as f :
+        inputSecondaryFiles = list((line.strip() for line in f))
+else :
+    inputSecondaryFiles = cms.untracked.vstring(options.inputSecondaryFiles)
 if len(inputFiles) is 0 :
     raise Exception('No files found for dataset %s run %d' % (options.dataStream, options.runNumber))
 print 'Ok, time to analyze'
@@ -52,6 +62,12 @@ secondaryMap = {
         'root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/0A6BACC1-A79C-E511-8606-0CC47A4C8EA8.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/129E931E-B09C-E511-93F4-0CC47A4D76BE.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/2210B287-AB9C-E511-A185-0CC47A4C8F08.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A51B3AC-A89C-E511-9D46-0CC47A4C8EA8.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A8DA380-A89C-E511-B535-0CC47A4D767E.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4CD53D8A-AB9C-E511-BFD7-0026189438E8.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/526D5BBE-B19C-E511-944F-0025905A60CA.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/76E9CDE3-B09C-E511-89FE-0CC47A4D76AA.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/86E0E6B3-B19C-E511-A614-0025905A6070.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/9A2BE4C4-B29C-E511-822B-0025905A6094.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/A686A218-AD9C-E511-A313-0CC47A4C8EA8.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AE68D4BE-B39C-E511-9C34-0025905A60CE.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AEC19F8E-B59C-E511-922E-0CC47A4D764C.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C09325-AC9C-E511-A90F-0025905B8568.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C650DB-A69C-E511-9331-0CC47A4C8EA8.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B266BEBF-B29C-E511-9187-0CC47A4D76BE.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/DE6A120B-A29C-E511-BBE8-00261894397F.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/ECC3251C-AD9C-E511-871C-002590593878.root','root://cmsxrootd.fnal.gov//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/FE388856-AC9C-E511-A0F5-0CC47A4C8E0E.root'],
     "file:pickEventsHighL1LowReco-MINI.root":[
         "file:pickEventsHighL1LowReco.root"
+        ],
+    "file:pickEvent-769674-MINI.root":[
+        "file:pickEvent-769674-RAW.root"
+        ],
+    "file:pickEvent-547237-MINI.root":[
+        "file:pickEvent-547237-RAW.root"
         ]
 }
 
@@ -81,8 +97,6 @@ process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
 
-process.load("L1Trigger.Stage3Ntuplizer.l1NtupleProducerStage3_cfi")
-
 process.uct2016EmulatorDigis.useECALLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useHCALLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
@@ -95,14 +109,15 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring(inputFiles),
-                            secondaryFileNames = cms.untracked.vstring(secondaryMap[options.inputFiles[0]]),
+                            #secondaryFileNames = cms.untracked.vstring(secondaryMap[options.inputFiles[0]]),
+                            secondaryFileNames = cms.untracked.vstring(inputSecondaryFiles),
                             #secondaryFileNames = cms.untracked.vstring("file:/data/ojalvo/localFiles/Run2015D/SingleMuon/RECO/16Dec2015-v1/10016/FAF49A05-DCA7-E511-8A3A-0CC47A4D7614.root")
 )
 
 outputFile = '/data/' + os.environ['USER'] + '/l1tCaloSummary-' + str(options.runNumber) + '.root'
 
 process.out = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string("pickEventsHighL1LowReco-RAW-MINI.root"),
+    fileName = cms.untracked.string(options.outputFileName),
     outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
     #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
 )

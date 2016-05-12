@@ -1,0 +1,530 @@
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/02AF61C5-A89C-E511-B6BD-20CF3027A59F.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2834, 2838], [2890, 2891], [2896, 2896], [2931, 2931], [2935, 2937], [2973, 2973], [2995, 2997]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/08F5EDC3-B39C-E511-9CF4-002590743042.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2869, 2871], [2908, 2908], [2916, 2919], [3016, 3018], [3043, 3043], [3295, 3297], [3382, 3382]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/0A6BACC1-A79C-E511-8606-0CC47A4C8EA8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2745, 2745], [2776, 2778], [2799, 2799], [2868, 2868], [2878, 2880], [2892, 2892], [2911, 2913], [2992, 2994]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/0E1E530B-B59C-E511-8096-00259073E520.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2909, 2910], [2962, 2964], [2971, 2972], [2991, 2991], [3004, 3004], [3013, 3015]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/129E931E-B09C-E511-93F4-0CC47A4D76BE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2734, 2736], [2752, 2752], [2883, 2883], [2926, 2928], [7242, 7242], [7265, 7266], [7297, 7299], [7312, 7313]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/1AF4B83C-AF9C-E511-9EA9-A4BADB3D00FF.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3248, 3249], [3381, 3381], [3445, 3447], [3478, 3479], [7195, 7197], [7247, 7248], [7255, 7256], [7264, 7264]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/2210B287-AB9C-E511-A185-0CC47A4C8F08.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2731, 2733], [2740, 2740], [2923, 2925], [2932, 2932], [2956, 2958], [3010, 3010], [3085, 3087], [3115, 3115]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/30763146-A49C-E511-90E8-D48564599CAA.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2986, 2988], [3040, 3040], [3054, 3054], [3103, 3105], [3196, 3198], [3361, 3361]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/32C25D23-AC9C-E511-8776-001D09FD0D10.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2844, 2844], [2848, 2850], [2897, 2898], [2929, 2930], [2983, 2985], [3019, 3019], [3051, 3051], [3061, 3063]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/406320F9-A59C-E511-905B-D48564597C70.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3044, 3045], [3052, 3053], [3140, 3141], [3154, 3155], [3199, 3201], [3235, 3235]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/466DBE0D-A29C-E511-A81F-001E4F1BC725.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3020, 3021], [3041, 3042], [3084, 3084], [3480, 3480], [7269, 7269], [7314, 7314], [7323, 7323]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A51B3AC-A89C-E511-9D46-0CC47A4C8EA8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2961, 2961], [3028, 3030], [3080, 3081], [3091, 3092], [3100, 3102], [3106, 3106], [3116, 3117]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A8DA380-A89C-E511-B535-0CC47A4D767E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2804, 2805], [2863, 2864], [3069, 3069], [3112, 3114], [7232, 7233], [7267, 7268]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4CD53D8A-AB9C-E511-BFD7-0026189438E8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2894, 2895], [2899, 2901], [2920, 2921], [2933, 2934], [2938, 2938], [2974, 2975], [3022, 3024], [3073, 3073]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4E453CB9-B19C-E511-A8E7-0025905A60B2.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3007, 3009], [3037, 3037], [3111, 3111], [3118, 3120], [3410, 3411], [7027, 7028]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/526D5BBE-B19C-E511-944F-0025905A60CA.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2765, 2766], [2806, 2807], [2873, 2874], [2959, 2960], [3070, 3072], [3078, 3079], [3088, 3090]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/56397245-579D-E511-86E9-002590596490.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3035, 3036], [3049, 3050]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/58B2BC2B-AC9C-E511-81B2-B083FED16468.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3202, 3204], [3247, 3247], [3362, 3363], [3379, 3380], [3640, 3642], [3688, 3688]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/5CC6B4BE-B39C-E511-8F25-0CC47A4C8F26.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2755, 2757], [2767, 2767], [2856, 2856], [2944, 2946], [3107, 3110], [3689, 3690], [7321, 7322]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/76E9CDE3-B09C-E511-89FE-0CC47A4D76AA.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2758, 2760], [2782, 2782], [2811, 2811], [2815, 2817], [2826, 2826], [2857, 2862], [2893, 2893]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/861FA3EE-AD9C-E511-A623-001E4F1B8E39.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3066, 3066], [3097, 3099], [3205, 3207], [3316, 3316], [3335, 3336], [3549, 3549], [7180, 7182], [7240, 7241]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/86E0E6B3-B19C-E511-A614-0025905A6070.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2741, 2744], [2783, 2784], [2809, 2810], [2902, 2905], [2939, 2940], [2950, 2951]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/9A2BE4C4-B29C-E511-822B-0025905A6094.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2746, 2748], [2770, 2772], [2791, 2791], [2803, 2803], [3236, 3237], [3244, 3245], [3310, 3312], [3409, 3409]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/A686A218-AD9C-E511-A313-0CC47A4C8EA8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3317, 3318], [3547, 3548], [7183, 7185], [7216, 7218], [7222, 7224], [7231, 7231], [7246, 7246], [7270, 7270]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/A8790C2B-AA9C-E511-ABB9-44A84225CFF0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2773, 2775], [2788, 2790], [2794, 2794], [2833, 2833], [2965, 2967], [2977, 2979], [2989, 2990]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AE68D4BE-B39C-E511-9C34-0025905A60CE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2768, 2769], [2797, 2798], [2808, 2808], [2822, 2823], [2881, 2882], [2906, 2907], [2953, 2955], [3001, 3002]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AEC19F8E-B59C-E511-922E-0CC47A4D764C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2763, 2763], [2786, 2787], [2818, 2820], [2854, 2855], [2969, 2970], [2980, 2981], [3031, 3034]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0477827-AD9C-E511-A03C-002590D600F2.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2795, 2796], [2842, 2843], [2876, 2877], [2914, 2915], [3059, 3060], [3082, 3083], [3156, 3156], [3166, 3168]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C09325-AC9C-E511-A90F-0025905B8568.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3383, 3384], [3466, 3468], [7081, 7083], [7271, 7272], [7318, 7319]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C650DB-A69C-E511-9331-0CC47A4C8EA8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2753, 2754], [2761, 2762], [2976, 2976], [2998, 3000], [4879, 4881], [7315, 7317], [7375, 7375]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B266BEBF-B29C-E511-9187-0CC47A4D76BE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2852, 2853], [2866, 2867], [2947, 2949], [2968, 2968], [3246, 3246], [7174, 7176]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/D677880C-579D-E511-8E39-0CC47A4C8E86.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2812, 2814], [2821, 2821]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/DE6A120B-A29C-E511-BBE8-00261894397F.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2952, 2952], [2982, 2982], [3003, 3003], [3011, 3012], [3047, 3048], [7257, 7257], [7320, 7320], [7376, 7377]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/E0D6879B-B59C-E511-A752-0CC47A4D761A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2792, 2793], [2824, 2825], [2827, 2829], [2851, 2851], [7029, 7029], [7141, 7143]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/ECC3251C-AD9C-E511-871C-002590593878.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2800, 2802], [2872, 2872], [3025, 3027], [3038, 3039], [3046, 3046], [3067, 3068], [3074, 3077]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/F41791CD-569D-E511-AFB7-B083FED13C9E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2839, 2841], [2875, 2875], [2922, 2922], [2941, 2943]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/FE388856-AC9C-E511-A0F5-0CC47A4C8E0E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2737, 2739], [2764, 2764], [2865, 2865], [2887, 2889], [3093, 3096], [3298, 3300], [3334, 3334]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/FE5A8989-B59C-E511-A341-20CF3027A5BF.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[2779, 2781], [2785, 2785], [3005, 3006], [3055, 3058], [3064, 3065], [3136, 3139]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/00D4320E-B29C-E511-8D9E-0025905A609A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3858, 3858], [7063, 7068], [7108, 7108], [7156, 7158], [7408, 7408]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/02704B38-A99C-E511-9965-0025905A610A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3170, 3171], [3184, 3185], [3263, 3264], [3292, 3293], [3302, 3305], [3442, 3444], [3451, 3451]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/062C3C3E-B69C-E511-90EA-0025905A60D6.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3551, 3552], [3599, 3600], [3703, 3704], [3730, 3732], [3763, 3763], [7102, 7103], [7273, 7275], [7366, 7366]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/0A0C04FD-AF9C-E511-9C31-0025905A60A6.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3556, 3558], [3585, 3585], [3631, 3633], [3681, 3681], [3721, 3723], [3841, 3843], [7036, 7036], [7105, 7105]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/0A97C026-B29C-E511-9385-B083FED13C9E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3265, 3267], [3415, 3415], [3671, 3672], [3751, 3753], [7132, 7134], [7144, 7146], [7165, 7165]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/16295E41-B69C-E511-87C0-0025905822B6.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3145, 3151], [3183, 3183], [3214, 3216], [3223, 3223], [3289, 3291], [3517, 3517]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/1C3FFC25-AE9C-E511-9FCA-0025905B8586.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3427, 3429], [3433, 3433], [3456, 3456], [3460, 3462], [3496, 3498], [3507, 3507], [3532, 3532], [3571, 3573]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/1CBFA644-BA9C-E511-9BA8-0025905A48D0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3358, 3360], [3373, 3373], [3873, 3873], [7096, 7098], [7193, 7194], [7201, 7202]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/1E09003F-B69C-E511-B5AB-0CC47A78A440.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3799, 3801], [3829, 3829], [3865, 3867], [3874, 3876], [3879, 3879], [7039, 7039], [7057, 7057], [7153, 7155]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/1E2FC73D-B69C-E511-B7F1-B083FED1321B.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3610, 3612], [3670, 3670], [7095, 7095], [7135, 7137], [7280, 7281], [7348, 7349]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/1E357744-B89C-E511-8E46-0025905A6068.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3578, 3579], [3790, 3792], [3794, 3795], [3808, 3809], [3824, 3826], [3862, 3863], [3880, 3881]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/20C6503E-B69C-E511-B2BD-0CC47A4D7634.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3870, 3870], [3883, 3885], [7130, 7131], [7200, 7200], [7219, 7220], [7285, 7287]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/22184F5A-B69C-E511-825C-002590596486.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3127, 3129], [3169, 3169], [3477, 3477], [3481, 3483], [3587, 3588], [3593, 3594], [3604, 3605], [3733, 3734]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/22A7C431-B29C-E511-92BB-002590747D9C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3368, 3369], [3523, 3525], [3550, 3550], [3613, 3614], [7152, 7152], [7276, 7278], [7305, 7305], [7333, 7335]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/28758325-AE9C-E511-8B32-0CC47A745298.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3190, 3192], [3238, 3238], [3320, 3321], [3341, 3342], [3350, 3351], [3403, 3404], [3505, 3506], [7045, 7046]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/28FE212B-AE9C-E511-B291-B083FED1321B.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3895, 3897], [7024, 7024], [7166, 7167], [7198, 7199], [7253, 7254], [7300, 7301]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/2C50FC9B-259D-E511-B02A-0CC47A745250.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3827, 3828], [3868, 3869]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/2CB71F00-B09C-E511-A27D-002590593920.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7071, 7074], [7106, 7107], [7119, 7119], [7126, 7128], [7213, 7214]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/2E1B165E-A59C-E511-AE08-002590D8C72C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3725, 3726], [7055, 7056], [7104, 7104], [7112, 7113], [7120, 7122], [7203, 7203], [7209, 7209]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/2E6E1F30-AE9C-E511-BFA6-002590D8C800.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3357, 3357], [3458, 3459], [3675, 3675], [3682, 3684], [3832, 3834], [7044, 7044], [7069, 7070], [7084, 7086]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/3051B046-B89C-E511-A52B-0025905A7786.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3325, 3327], [3424, 3424], [3434, 3435], [3439, 3440], [3514, 3516], [3634, 3634]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/343F9532-B49C-E511-A209-0CC47A78A3B4.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3705, 3705], [3712, 3714], [7021, 7023], [7060, 7062], [7087, 7088], [7109, 7110], [7138, 7139]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/3609A7C2-AA9C-E511-9925-0025905A60BC.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3278, 3279], [3309, 3309], [3337, 3338], [3397, 3399], [3635, 3636], [3679, 3680], [7149, 7149], [7171, 7173]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/36951529-AE9C-E511-8908-B083FED13C9E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3131, 3132], [3142, 3143], [3226, 3229], [3282, 3282], [3333, 3333], [3343, 3345], [3487, 3489]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/3AA6C626-AE9C-E511-B2D1-0025905A6088.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3797, 3798], [3815, 3816], [3835, 3836], [3856, 3857], [7037, 7038], [7147, 7148], [7169, 7170], [7177, 7178]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/4411E847-BA9C-E511-9A0A-0025905A610A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3224, 3225], [3370, 3371], [3499, 3501], [3511, 3511], [3596, 3597], [3601, 3603], [3646, 3647], [3667, 3667]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/46514924-AE9C-E511-B03F-0CC47A78A30E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3648, 3648], [3655, 3657], [3685, 3687], [3697, 3697], [3756, 3762], [3772, 3772]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/5050ED69-AC9C-E511-9542-0CC47A4D762E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3820, 3822], [3844, 3844], [3853, 3855], [7048, 7048], [7114, 7116], [7129, 7129], [7354, 7356]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/64AF0539-B69C-E511-A5D6-B083FED13803.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3144, 3144], [3178, 3180], [3230, 3231], [3241, 3242], [3260, 3261], [3280, 3281], [3416, 3417], [7042, 7043]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/6682C52F-B29C-E511-A1D3-002590D60036.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7336, 7338], [7342, 7344], [7363, 7364], [7384, 7386], [7402, 7402]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/70550945-B89C-E511-8D36-D4856459AC42.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3394, 3396], [3457, 3457], [3662, 3663], [3673, 3674], [7058, 7059], [7207, 7208], [7365, 7365], [7381, 7383]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/723C553F-B69C-E511-9B19-0CC47A78A426.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3405, 3405], [3616, 3618], [3664, 3666], [3676, 3676], [3768, 3768], [3773, 3774], [3784, 3786], [3877, 3878]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/769D4D41-B69C-E511-AC35-0025905A610A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3651, 3651], [3720, 3720], [3736, 3738], [3742, 3744], [3748, 3750], [3764, 3767], [7078, 7078]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/7A66C61F-9C9C-E511-B152-0025905A60CE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3533, 3534], [3819, 3819], [3837, 3837], [3882, 3882], [3891, 3891], [7367, 7368], [7398, 7398]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/7ADE37C3-AA9C-E511-928C-0CC47A78A3EC.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3211, 3213], [3349, 3349], [3425, 3426], [3475, 3476], [3735, 3735], [3781, 3783], [7330, 7332], [7339, 7339]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/7E63C0E3-AA9C-E511-93A5-44A84225CDFE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3124, 3126], [3130, 3130], [3271, 3273], [3301, 3301], [7030, 7032], [7054, 7054]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/8034003F-F19C-E511-A157-0CC47A4D75EE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3157, 3159], [3253, 3253], [3830, 3831], [3847, 3848], [7340, 7341], [7357, 7358]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/8089F537-A99C-E511-98D4-0025905A60AA.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3175, 3177], [3208, 3208], [3372, 3372], [3508, 3510], [3653, 3654], [3718, 3719], [7049, 7050], [7117, 7118]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/86D56909-B29C-E511-BBEB-0025907277FE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3163, 3165], [3220, 3222], [3250, 3252], [3259, 3259], [3262, 3262], [3275, 3276], [3286, 3286], [3331, 3332]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/8E6D5745-B69C-E511-94CC-0025905A610C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3778, 3780], [3845, 3846], [3849, 3849], [3859, 3861], [3864, 3864], [3886, 3890], [7123, 7123]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/8ED32142-B69C-E511-9765-0025905A60BE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3441, 3441], [3464, 3465], [3472, 3473], [3493, 3495], [3518, 3519], [3649, 3650], [3739, 3741], [3796, 3796]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/908C496E-AC9C-E511-9BD6-0025905A60E0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3283, 3285], [3319, 3319], [3471, 3471], [3526, 3528], [3544, 3546], [3598, 3598], [3805, 3807], [3823, 3823]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/9288980B-269D-E511-9A8A-002590D8C77A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3187, 3189], [3277, 3277], [7289, 7290], [7303, 7304]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/9402E9FB-AF9C-E511-A6FB-0CC47A78A446.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7047, 7047], [7099, 7101], [7282, 7284], [7288, 7288], [7291, 7293], [7306, 7306], [7309, 7311], [7327, 7327]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/9A21583C-A99C-E511-A943-003048FFCB96.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3452, 3455], [7124, 7125], [7150, 7151], [7187, 7188], [7215, 7215], [7261, 7263], [7393, 7394]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/A809E76D-AC9C-E511-BBD6-0025905A611E.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3152, 3153], [3181, 3182], [3217, 3219], [3322, 3322], [3503, 3504], [3569, 3570], [3583, 3584], [3619, 3620]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/A8F52506-B29C-E511-A217-0CC47A4D7640.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3562, 3564], [3586, 3586], [7359, 7359], [7387, 7389], [7406, 7407]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/AC5D6272-B69C-E511-83DE-D48564591B68.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3400, 3402], [3418, 3420], [3490, 3492], [3520, 3522], [7079, 7080], [7228, 7229]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/AC6D1E60-B69C-E511-BD06-002590747D9C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7210, 7212], [7279, 7279], [7302, 7302], [7324, 7326], [7345, 7347], [7405, 7405]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/AEA22780-A69C-E511-95CC-B083FED04276.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3256, 3258], [3268, 3270], [3274, 3274], [3367, 3367], [3615, 3615], [3658, 3660], [3709, 3711], [3724, 3724]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/B62BC600-B09C-E511-A759-002590D60036.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3287, 3288], [3412, 3413], [7052, 7053], [7090, 7094], [7111, 7111], [7249, 7252]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/B8AD006E-AC9C-E511-BA90-0025905A60CE.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3172, 3174], [3186, 3186], [3209, 3210], [3307, 3308], [3315, 3315], [3340, 3340], [3346, 3348], [3787, 3789]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/C06F1F24-AE9C-E511-A13F-0CC47A4D7640.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7189, 7192], [7307, 7308], [7328, 7329], [7351, 7353], [7369, 7371], [7396, 7397]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/C226BF2A-AE9C-E511-9EE6-0025905A612C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3193, 3195], [3323, 3324], [3355, 3356], [3450, 3450], [3485, 3486], [3568, 3568], [3580, 3582], [3871, 3872]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/C491242B-AE9C-E511-87B5-002590593872.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3576, 3576], [3625, 3627], [3694, 3694], [3745, 3747], [3775, 3777], [3793, 3793], [3850, 3852], [7051, 7051]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/C6EB626F-AC9C-E511-9A8E-0025905A612C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3254, 3255], [3294, 3294], [3306, 3306], [3313, 3314], [3328, 3330], [3388, 3390], [3484, 3484], [3607, 3609]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D0060987-A69C-E511-9A61-0025905964C0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3239, 3240], [3376, 3377], [3898, 3900], [7159, 7161], [7168, 7168]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D22C4227-A09C-E511-A05F-0CC47A4D7690.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3474, 3474], [7025, 7026], [7089, 7089], [7179, 7179], [7350, 7350], [7395, 7395], [7403, 7404]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D44DE86F-AC9C-E511-B0CF-0025905A60B0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3339, 3339], [3352, 3354], [3378, 3378], [3535, 3537], [3621, 3621], [3637, 3639], [3802, 3804], [3811, 3811]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D6EF1D2F-B49C-E511-98EC-0CC47A4D7616.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3437, 3438], [3448, 3449], [3677, 3678], [3702, 3702], [3706, 3707], [3715, 3717]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D8563F2C-B49C-E511-91B5-0025905A606A.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3414, 3414], [3541, 3543], [3577, 3577], [3892, 3894], [7204, 7206], [7243, 7243]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/D8763542-A19C-E511-8CDF-0CC47A78A3F8.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3695, 3696], [3698, 3699], [7040, 7041], [7244, 7245], [7409, 7410]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/DE6FD329-AE9C-E511-87CF-0025905964C0.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3538, 3540], [3565, 3567], [3592, 3592], [3606, 3606], [3622, 3624], [3628, 3630], [3652, 3652], [3727, 3727]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/E23CEB6F-AC9C-E511-9333-0025905A612C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3374, 3375], [3469, 3470], [3691, 3693], [3728, 3729], [3754, 3755], [3812, 3814], [3817, 3818]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/E4FA5B33-A99C-E511-B782-001F2965D442.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3232, 3234], [3243, 3243], [3364, 3366], [3661, 3661], [7075, 7077], [7230, 7230], [7258, 7260]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/E832B0FB-AF9C-E511-9B7E-0CC47A4D76B2.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3133, 3135], [3385, 3387], [3436, 3436], [3463, 3463], [3668, 3669], [3700, 3701], [3708, 3708], [3838, 3840]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/F222D86E-AC9C-E511-AF95-003048FFCC18.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[7140, 7140], [7162, 7164], [7186, 7186], [7221, 7221], [7225, 7227], [7237, 7239]]
+/store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/70000/FA86AA11-B29C-E511-A6B4-0025905A613C.root
+
+Showing 1-10 out of 1 results, for more results use --idx/--limit options
+
+[[3430, 3432], [3502, 3502], [3512, 3513], [3574, 3575], [3589, 3591], [3595, 3595], [3810, 3810], [7033, 7035]]

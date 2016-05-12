@@ -116,7 +116,8 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
 
   edm::Handle<reco::VertexCollection> vertices;
   if(evt.getByToken(vtxLabel_, vertices)){
-    nvtx = vertices->size();
+    nvtx = (int) vertices->size();
+    std::cout<<"nVertices "<<nvtx<<std::endl;
   }
   
   Handle<L1CaloRegionCollection> regions;
@@ -165,7 +166,7 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
   if(!evt.getByToken(packedPfCandsToken_, pfCands)){
     std::cout<<"Error Getting packed PFCandidates"<<std::endl;
   }
-  //std::cout<<"doing the jets"<<std::endl;
+
   //loop over jets
   Handle<vector<pat::Jet> > jets;
   if(evt.getByToken(jetSrc_, jets)){//Begin Getting Reco Jets

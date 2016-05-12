@@ -18,7 +18,7 @@ farmoutAnalysisJobs --assume-input-files-exist  --input-file-list=ggHtt-76X-TSG-
 --output-dag-file=/data/ojalvo/ggHttMC-$1-SUBStage3/dags/dag \
 ggHttMC-$1  \
 $CMSSW_BASE  \
-$CMSSW_BASE/src/L1Trigger/Stage3Ntuplizer/test/SUBStage3.py farmout=True rates=False data=False
+$CMSSW_BASE/src/L1Trigger/Stage3Ntuplizer/test/SUBStage3.py farmout=True rates=False data=False $2
 
 rm SUBStage3.py
 
