@@ -282,16 +282,6 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
   std::sort(rlxTauSortedEtaRestricted2p4.begin(),rlxTauSortedEtaRestricted2p4.end(),compareByPtTrig);
   std::sort(rlxTauSortedEtaRestricted2p1.begin(),rlxTauSortedEtaRestricted2p1.end(),compareByPtTrig);
 
-  //Begin Making Rate Plots
-  /*
-  for( auto rlxTau : rlxTauSorted ) {
-    if( rlxTau.pt() > 150 )
-      tau_pt->Fill( 150 );
-    else tau_pt->Fill( rlxTau.pt() );
-    tau_eta->Fill( rlxTau.eta() );
-    tau_phi->Fill( rlxTau.phi() );
-  }*/
-
   //Now for the iso taus
   vector<l1extra::L1JetParticle> isoTauSorted;
   vector<l1extra::L1JetParticle> isoTauSortedEtaRestricted2p1;
@@ -369,10 +359,7 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
       towerEta = convertGenEta(recoEta);
       towerPhi = convertGenPhi(recoPhi);
       std::cout<<"towerEta "<<towerEta<<" towerPhi "<<towerPhi<<std::endl;
-      //if(towerEta <= -2.4 || towerEta >= 2.4 || towerPhi <= -3.2 || towerPhi > 3.2 ){
-      //continue;
-      //}
-      //std::cout<<"starting to calculate things"<<std::endl;
+
       decayMode = recoTau.decayMode();
       std::vector<tower> towers_nearTower;
       towers_nearTower.clear();

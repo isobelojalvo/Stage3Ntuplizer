@@ -41,10 +41,10 @@
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/PatCandidates/interface/Tau.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
-//#include "L1Trigger/L1TCaloLayer1/src/L1UCTCollections.h"
 
 #include "DataFormats/L1Trigger/interface/BXVector.h"
 #include "DataFormats/L1Trigger/interface/Tau.h"
+#include "DataFormats/L1Trigger/interface/Jet.h"
 
 
 #include <memory>
@@ -57,7 +57,6 @@
 #include "CondFormats/L1TObjects/interface/L1CaloHcalScale.h"
 #include "CondFormats/DataRecord/interface/L1CaloHcalScaleRcd.h"
 #include "FWCore/Framework/interface/ESHandle.h"
-//#include "L1Trigger/L1TCaloLayer1/src/UCTRegion.hh"
 #include "L1Trigger/Stage3Ntuplizer/plugins/UCTRegionProcess.hh"
 
 //
@@ -129,19 +128,11 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   edm::EDGetTokenT<reco::VertexCollection> vertices_;
   edm::EDGetTokenT<EcalTrigPrimDigiCollection> ecalSrc_; 
   edm::EDGetTokenT<HcalTrigPrimDigiCollection> hcalSrc_;
-  //edm::EDGetTokenT<double> recoPt_;
-  //edm::EDGetTokenT<std::string> folderName_;
   edm::EDGetTokenT<reco::VertexCollection> vtxLabel_;
   edm::EDGetTokenT<vector<pat::Jet> > jetSrc_;
+  edm::EDGetTokenT<BXVector <l1t::Jet> > stage1JetSource_;
+  edm::EDGetTokenT<BXVector <l1t::Jet> > stage2JetSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraJets_;
-  //edm::EDGetTokenT<L1GctJetCandCollection> gctIsoTauJetsSource_;
-  //edm::EDGetTokenT<L1GctJetCandCollection> gctTauJetsSource_;
-  edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraIsoTauSource_;
-  edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraTauSource_;
-  edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage2TauSource_;
-  edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage1TauSource_;
-  edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage1IsoTauSource_;
-  edm::EDGetTokenT<vector <L1CaloRegion> > regionSource_;
 
   std::string folderName_;
   double recoPt_;

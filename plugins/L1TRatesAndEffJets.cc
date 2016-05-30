@@ -34,6 +34,8 @@ L1TRatesAndEffJets::L1TRatesAndEffJets( const ParameterSet & cfg ) :
   hcalSrc_(consumes<HcalTrigPrimDigiCollection>(cfg.getParameter<edm::InputTag>("hcalDigis"))),
   vtxLabel_(consumes<reco::VertexCollection>(cfg.getParameter<edm::InputTag>("vertices"))),
   jetSrc_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJets"))),
+  stage1JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage1JetSource"))),
+  stage2JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage2JetSource"))),
   l1ExtraJets_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraJetSource")))
   {
 
@@ -96,7 +98,9 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
    //edm::Handle < BXVector<l1t::Tau> > stage1IsoTaus;
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraJets;
-  
+  edm::Handle < BXVector<l1t::Jet> > stage2Jets;
+  edm::Handle < BXVector<l1t::Jet> > stage1Jets;
+
   std::vector<pat::Jet> goodJets;
   
   edm::Handle<vector<pat::PackedCandidate> >pfCands;
@@ -140,6 +144,27 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
       l1JetSorted.push_back(*l1Jet);
       if(abs(l1Jet->eta()) < 2.4) l1JetSortedEtaRestricted2p4.push_back(*l1Jet);
     }
+  }
+  else if(evt.getByToken(stage2JetSource_, stage2Jets)){
+    std::cout<<"found l1 stage 2 jets size: "<< stage2Jets->size() <<std::endl;
+    for(BXVector<l1t::Jet>::const_iterator l1Jet = stage2Jets->begin(); l1Jet != stage2Jets->end(); l1Jet++ ) {
+      //std::cout<<"l1Jet Pt "<<l1Jet->pt()<<" eta: "<<l1Jet->eta()<<" phi: "<<l1Jet->phi()<<std::endl;
+      l1extra::L1JetParticle tempJet(l1Jet->p4());
+      l1JetSorted.push_back(tempJet);
+      if(abs(l1Jet->eta()) < 2.4) l1JetSortedEtaRestricted2p4.push_back(tempJet);
+    }
+  }
+  else if(evt.getByToken(stage1JetSource_, stage1Jets)){
+    std::cout<<"found l1 stage 1 jets size: "<< stage1Jets->size() <<std::endl;
+    for(BXVector<l1t::Jet>::const_iterator l1Jet = stage1Jets->begin(); l1Jet != stage1Jets->end(); l1Jet++ ) {
+      std::cout<<"l1Jet Pt "<<l1Jet->pt()<<" eta: "<<l1Jet->eta()<<" phi: "<<l1Jet->phi()<<std::endl;
+      l1extra::L1JetParticle tempJet(l1Jet->p4());
+      l1JetSorted.push_back(tempJet);
+      if(abs(l1Jet->eta()) < 2.4) l1JetSortedEtaRestricted2p4.push_back(tempJet);
+    }
+  }
+  else{
+    std::cout<<"ERROR failed to find L1 jets!!"<<std::endl;
   }
   
   std::sort(l1JetSorted.begin(),l1JetSorted.end(),compareByPtJets);

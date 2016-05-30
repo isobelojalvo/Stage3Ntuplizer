@@ -5,11 +5,11 @@
 cat testL1TStage3RatesEffMC.py > SUBStage3.py
 cat submit.py >> SUBStage3.py
 
-#rm -r /data/ojalvo/ZeroBias-260627-$1-SUBStage3/
-#mkdir /data/ojalvo/ZeroBias-260627-$1-SUBStage3/
+rm -r /data/ojalvo/ZeroBias-260627-$1-SUBStage3/
+mkdir /data/ojalvo/ZeroBias-260627-$1-SUBStage3/
 ##make dag dir
-#mkdir -p /data/ojalvo/ZeroBias-260627-$1-SUBStage3/dags
-#mkdir -p /data/ojalvo/ZeroBias-260627-$1-SUBStage3/dags/daginputs
+mkdir -p /data/ojalvo/ZeroBias-260627-$1-SUBStage3/dags
+mkdir -p /data/ojalvo/ZeroBias-260627-$1-SUBStage3/dags/daginputs
 
 ## outputdir = srm://cmssrm.hep.wisc.edu:8443/srm/$1/server?SFN=/hdfs/store/user/ojalvo/ZeroBias-260627-$1-SUBStage3/
 #Matching E and H activity

@@ -21,11 +21,15 @@ options.register('inputFileList', '', VarParsing.multiplicity.singleton, VarPars
 options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'Use ORCON for conditions.  This is necessary for very recent runs where conditions have not propogated to Frontier')
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
+options.register('jets',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between jets and taus')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
 options.parseArguments()
 
 if options.rates is False :
-    from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    if options.jets is False :
+        from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    else :
+        from L1Trigger.Stage3Ntuplizer.QCD_PT_15to3000_cfi import *
 
 def formatLumis(lumistring, run) :
     lumis = (lrange.split('-') for lrange in lumistring.split(','))
@@ -120,10 +124,16 @@ process.simRctDigis.hcalDigis = cms.VInputTag('simHcalTriggerPrimitiveDigis')
 process.simRpcTriggerDigis.label         = 'muonRPCDigis'
 process.simRpcTechTrigDigis.RPCDigiLabel  = 'muonRPCDigis'
 
-process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2_cfi")
-process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.folderName = cms.untracked.string("Stage2Taus")
+if options.jets is True :
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2Jets_cfi")
+    process.l1NtupleProducer.folderName = cms.untracked.string("Stage1Jets")
+    process.l1NtupleProducer.stage2JetSource = cms.InputTag("garbage")
+    process.l1NtupleProducer.stage1JetSource    = cms.InputTag("simCaloStage1FinalDigis","preGtJets")
+else :
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2_cfi")
+    process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
+    process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
+    process.l1NtupleProducer.folderName = cms.untracked.string("Stage1Taus")
 #process.l1NtupleProducer.stage2TauSource = cms.InputTag("simCaloStage1FinalDigis","rlxTaus")
 
 #process.L1TReEmulPath = cms.Path(process.L1TReEmul)
@@ -162,9 +172,9 @@ process.TFileService = cms.Service(
 process.p = cms.Path(process.RawToDigi * process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator * process.l1NtupleProducer)
 
 
-#process.out = cms.OutputModule("PoolOutputModule",
-#    fileName = cms.untracked.string("l1TFullEvent.root"),
-#    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
-##    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
-#)
-#process.e = cms.EndPath(process.out)
+process.out = cms.OutputModule("PoolOutputModule",
+    fileName = cms.untracked.string("l1TFullEvent.root"),
+    outputCommands = cms.untracked.vstring('keep *_*_*_RAW2DIGI') #'keep *_*_*_L1TCaloSummaryTest')
+#    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
+)
+process.e = cms.EndPath(process.out)

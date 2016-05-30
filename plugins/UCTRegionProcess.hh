@@ -27,7 +27,7 @@ public:
   // Packed data access
 
   const uint32_t rawData() const {return regionSummary;}
-  const uint32_t location() const {return ((regionSummary & LocationBits) >> LocationShift);}
+  const uint32_t location() const {return ((regionSummary & l1tcalo::LocationBits) >> l1tcalo::LocationShift);}
  
  //fix me
   const int hitCaloEta() const {
@@ -133,9 +133,9 @@ float towerPhiRCTMap[72]=
   // Access functions for convenience
   // Note that the bit fields are limited in hardware
 
-  const uint32_t et() const {return (RegionETMask & regionSummary);}
-  const bool isEGammaLike() const {return !((RegionEGVeto & regionSummary) == RegionEGVeto);}
-  const bool isTauLike() const {return !((RegionTauVeto & regionSummary) == RegionTauVeto);}
+  const uint32_t et() const {return (l1tcalo::RegionETMask & regionSummary);}
+  const bool isEGammaLike() const {return !((l1tcalo::RegionEGVeto & regionSummary) == l1tcalo::RegionEGVeto);}
+  const bool isTauLike() const {return !((l1tcalo::RegionTauVeto & regionSummary) == l1tcalo::RegionTauVeto);}
 
   // More access functions
   /*

@@ -110,6 +110,26 @@ process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
 process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
 process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
+###
+process.uct2016EmulatorDigis.pumLUT00 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT01 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT02 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT03 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT04 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT05 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT06 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT07 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT08 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT09 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT10 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT11 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT12 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT13 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT14 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT15 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT16 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+process.uct2016EmulatorDigis.pumLUT17 = cms.vuint32(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+###
 print "tau Isolation Factor: " 
 print options.tauIsolationFactor
 
