@@ -12,7 +12,7 @@ l1NtupleProducer = cms.EDAnalyzer("L1TRatesAndEff",
                                   #remove all possible muons
                                   recoTauDiscriminatorIso = cms.InputTag("hpsPFTauDiscriminationByLooseIsolation"),
                                   recoTauDiscriminatorMu  = cms.InputTag("hpsPFTauDiscriminationByTightMuonRejection3"),
-                                  vertices                = cms.InputTag("offlinePrimaryVertices"),
+                                  vertices                = cms.InputTag("offlineSlimmedPrimaryVertices"),
                                   recoPtCut               = cms.double(4),
                                   pfCands                 = cms.InputTag("packedPFCandidates"),
                                   ecalDigis               = cms.InputTag( 'l1tCaloLayer1Digis'),

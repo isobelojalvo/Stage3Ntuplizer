@@ -140,10 +140,10 @@ process.TFileService = cms.Service(
 process.p = cms.Path(process.RawToDigi*process.simHcalTriggerPrimitiveDigis * process.simCaloStage2Layer1Digis * process.simCaloStage2Digis * process.l1NtupleProducer)
 
 
-process.out = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string("l1TFullEvent.root"),
-    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
-    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
-)
+#process.out = cms.OutputModule("PoolOutputModule",
+#    fileName = cms.untracked.string("l1TFullEvent.root"),
+#    outputCommands = cms.untracked.vstring('keep *') #'keep *_*_*_L1TCaloSummaryTest')
+#    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
+#)
 
 #process.e = cms.EndPath(process.out)
