@@ -1,1 +1,2 @@
 cmsRun Stage1DataA.py inputFiles=root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/MINIAOD/PromptReco-v1/000/251/162/00000/160C08A3-4227-E511-B829-02163E01259F.root
+cmsRun testL1TStage2RatesEff.py inputFiles=/store/data/Run2015D/ZeroBias1/RAW/v1/000/260/627/00000/6699FBBE-3B82-E511-8673-02163E014444.root rates=True
