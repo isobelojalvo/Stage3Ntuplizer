@@ -126,6 +126,7 @@ class triggerTestArea : public edm::EDAnalyzer {
   int run, lumi, event, nvtx;
   int runJ, lumiJ, eventJ, nvtxJ;
   double isoTauPt, rlxTauPt, isoTauEta, rlxTauEta, isoTauPhi, rlxTauPhi;
+  double isoTauPtJ, rlxTauPtJ, isoTauEtaJ, rlxTauEtaJ, isoTauPhiJ, rlxTauPhiJ;
   double recoPt, recoEta, recoPhi;
   double recoPtJ, recoEtaJ, recoPhiJ;
   int decayMode;

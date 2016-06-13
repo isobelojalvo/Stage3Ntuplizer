@@ -62,6 +62,13 @@ triggerTestArea::triggerTestArea( const ParameterSet & cfg ) :
     //efficiencyTreeTaus->Branch("jetEt",         &jetEt,        "jetEt/D");
     //efficiencyTreeTaus->Branch("jetEta",        &jetEta,       "jetEta/D");
     //efficiencyTreeTaus->Branch("jetPhi",        &jetPhi,       "jetPhi/D");
+    efficiencyTreeTaus->Branch("rlxTauPt",    &rlxTauPt,    "rlxTauPt/D");
+    efficiencyTreeTaus->Branch("rlxTauEta",   &rlxTauEta,   "rlxTauEta/D");
+    efficiencyTreeTaus->Branch("rlxTauPhi",   &rlxTauPhi,   "rlxTauPhi/D");
+
+    efficiencyTreeTaus->Branch("isoTauPt",    &isoTauPt,    "isoTauPt/D");
+    efficiencyTreeTaus->Branch("isoTauEta",   &isoTauEta,   "isoTauEta/D");
+    efficiencyTreeTaus->Branch("isoTauPhi",   &isoTauPhi,   "isoTauPhi/D");
 
     //to calculate
     efficiencyTreeTaus->Branch("ecalTPG3x3",        &TPGE3x3,          "ecalTPG3x3/D");
@@ -120,7 +127,7 @@ triggerTestArea::triggerTestArea( const ParameterSet & cfg ) :
 
     regionEta   = folder.make<TH1F>( "region_eta"  , "eta", 22, 1, 22. );
     regionPhi   = folder.make<TH1F>( "region_phi"  , "phi", 72, 1, 72. );
-    regionPt   = folder.make<TH1F>( "region_pt"  , "pt", 100, 0, 100. );
+    regionPt    = folder.make<TH1F>( "region_pt"  , "pt", 100, 0, 100. );
 
     regionEtaFine   = folder.make<TH1F>( "region_eta_Fine"  , "eta", 88, 1, 88. );
     regionPhiFine   = folder.make<TH1F>( "region_phi_Fine"  , "phi", 72, 1, 72. );
@@ -143,6 +150,14 @@ triggerTestArea::triggerTestArea( const ParameterSet & cfg ) :
     //efficiencyTreeJets->Branch("jetEt",         &jetEt,        "jetEt/D");
     //efficiencyTreeJets->Branch("jetEta",        &jetEta,       "jetEta/D");
     //efficiencyTreeJets->Branch("jetPhi",        &jetPhi,       "jetPhi/D");
+
+    efficiencyTreeJets->Branch("rlxTauPt",    &rlxTauPtJ,    "rlxTauPt/D");
+    efficiencyTreeJets->Branch("rlxTauEta",   &rlxTauEtaJ,   "rlxTauEta/D");
+    efficiencyTreeJets->Branch("rlxTauPhi",   &rlxTauPhiJ,   "rlxTauPhi/D");
+
+    efficiencyTreeJets->Branch("isoTauPt",    &isoTauPtJ,    "isoTauPt/D");
+    efficiencyTreeJets->Branch("isoTauEta",   &isoTauEtaJ,   "isoTauEta/D");
+    efficiencyTreeJets->Branch("isoTauPhi",   &isoTauPhiJ,   "isoTauPhi/D");
 
     //to calculate
     efficiencyTreeJets->Branch("ecalTPG3x3",    &TPGE3x3J,      "ecalTPG3x3/D");
@@ -349,7 +364,7 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
       EoH_highPtTower=0;HoE_highPtTower=0;EoEpH_highPtTower=0;HoEpH_highPtTower=0;
       TPGE_nearTower=0;TPGH_nearTower=0;TPG_nearTower=0;EoH_nearTower=0;HoE_nearTower=0;EoEpH_nearTower=0;HoEpH_nearTower=0;
       EoH_eAndhTower=0;HoE_eAndhTower=0;EoEpH_eAndhTower=0; HoEpH_eAndhTower=0;      
-
+      
       //std::cout<<"recoEta "<<recoEta<<" recoPhi "<<recoPhi<<std::endl;
       if(recoEta <= -2.4 || recoEta >= 2.4 || recoPhi <= -3.2 || recoPhi > 3.2 ){
 	std::cout<<"recoEta "<<recoEta<<" recoPhi "<<recoPhi<<std::endl;
@@ -406,6 +421,31 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
 	  break;
 	}
       }
+
+      //Fill L1 Objects
+      isoTauPt = 0; isoTauEta = -99; isoTauPhi = -99; 
+      rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
+            
+      for(uint32_t k = 0; k<isoTauSorted.size(); k++){
+	double dR = deltaR( recoTau.p4(), isoTauSorted.at(k).p4());
+	if( dR < deltaR_){
+	  isoTauPt  = isoTauSorted.at(k).pt();
+	  isoTauEta = isoTauSorted.at(k).eta();
+	  isoTauPhi = isoTauSorted.at(k).phi();
+	  break;
+	}
+      }
+      for(uint32_t k = 0; k<rlxTauSorted.size(); k++){
+	double dR = deltaR( recoTau.p4(), rlxTauSorted.at(k).p4());
+	if(dR < deltaR_){
+	  rlxTauPt  = rlxTauSorted.at(k).pt();
+	  rlxTauEta = rlxTauSorted.at(k).eta();
+	  rlxTauPhi = rlxTauSorted.at(k).phi();
+	  break;
+	}
+      }
+
+
       //std::cout<<"filling tau tree"<<std::endl;
       efficiencyTreeTaus->Fill();
     }
@@ -487,6 +527,30 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
 	  break;
 	}
       }
+      
+      //Fill L1 Objects
+      isoTauPtJ = 0; isoTauEtaJ = -99; isoTauPhiJ = -99; 
+      rlxTauPtJ = 0; rlxTauEtaJ = -99; rlxTauPhiJ = -99;
+      
+      for(uint32_t k = 0; k<isoTauSorted.size(); k++){
+	double dR = deltaR( recoJet.p4(), isoTauSorted.at(k).p4());
+	if( dR < deltaR_){
+	  isoTauPtJ  = isoTauSorted.at(k).pt();
+	  isoTauEtaJ = isoTauSorted.at(k).eta();
+	  isoTauPhiJ = isoTauSorted.at(k).phi();
+	  break;
+	}
+      }
+      for(uint32_t k = 0; k<rlxTauSorted.size(); k++){
+	double dR = deltaR( recoJet.p4(), rlxTauSorted.at(k).p4());
+	if(dR < deltaR_){
+	  rlxTauPtJ  = rlxTauSorted.at(k).pt();
+	  rlxTauEtaJ = rlxTauSorted.at(k).eta();
+	  rlxTauPhiJ = rlxTauSorted.at(k).phi();
+	  break;
+	}
+      }
+
       efficiencyTreeJets->Fill();
     }
     

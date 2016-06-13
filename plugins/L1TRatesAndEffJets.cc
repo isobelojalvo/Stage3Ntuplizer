@@ -34,6 +34,7 @@ L1TRatesAndEffJets::L1TRatesAndEffJets( const ParameterSet & cfg ) :
   hcalSrc_(consumes<HcalTrigPrimDigiCollection>(cfg.getParameter<edm::InputTag>("hcalDigis"))),
   vtxLabel_(consumes<reco::VertexCollection>(cfg.getParameter<edm::InputTag>("vertices"))),
   jetSrc_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJets"))),
+  jetSrcAK8_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJetsAK8"))),
   stage1JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage1JetSource"))),
   stage2JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage2JetSource"))),
   l1ExtraJets_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraJetSource")))
@@ -80,6 +81,29 @@ L1TRatesAndEffJets::L1TRatesAndEffJets( const ParameterSet & cfg ) :
     recoJet_eta  = folder.make<TH1F>( "recoJet_eta"  , "eta", 100,  -3, 3. );
     recoJet_phi  = folder.make<TH1F>( "recoJet_phi"  , "phi", 100,  -4, 4. );
 
+    recoJetAK8_pt   = folder.make<TH1F>( "recoJetAK8_pt" , "p_{t}", 300,  0., 300. );
+    recoJetAK8_eta  = folder.make<TH1F>( "recoJetAK8_eta"  , "eta", 100,  -3, 3. );
+    recoJetAK8_phi  = folder.make<TH1F>( "recoJetAK8_phi"  , "phi", 100,  -4, 4. );
+
+    efficiencyTreeAK8 = folder.make<TTree>("EfficiencyTreeAK8", "Efficiency Tree AK8");
+    efficiencyTreeAK8->Branch("run",    &run,     "run/I");
+    efficiencyTreeAK8->Branch("lumi",   &lumi,    "lumi/I");
+    efficiencyTreeAK8->Branch("event",  &event,   "event/I");
+    efficiencyTreeAK8->Branch("nvtx",   &nvtx,     "nvtx/D");
+    
+    efficiencyTreeAK8->Branch("recoPt",    &recoPtAK8,   "recoPt/D");
+    
+    efficiencyTreeAK8->Branch("jetPt",      &jetPtAK8, "jetPt/D");
+
+    efficiencyTreeAK8->Branch("recoEta",       &recoEtaAK8,   "recoEta/D");
+    efficiencyTreeAK8->Branch("jetEta",     &jetEtaAK8, "jetEta/D");
+    
+    efficiencyTreeAK8->Branch("recoPhi",       &recoPhiAK8,   "recoPhi/D");
+    efficiencyTreeAK8->Branch("jetPhi",     &jetPhiAK8, "jetPhi/D");
+
+    efficiencyTreeAK8->Branch("l1Matched",  &l1MatchedAK8, "l1Matched/I");
+
+
   }
 
 void L1TRatesAndEffJets::beginJob( const EventSetup & es) {
@@ -91,8 +115,8 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
    std::cout<<"Analyzing..."<<std::endl;
    nEvents->Fill(1);
    
-   run = evt.id().run();
-   lumi = evt.id().luminosityBlock();
+   run   = evt.id().run();
+   lumi  = evt.id().luminosityBlock();
    event = evt.id().event();
    edm::Handle<reco::VertexCollection> vertices;   
    //edm::Handle < BXVector<l1t::Tau> > stage1IsoTaus;
@@ -102,6 +126,7 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
   edm::Handle < BXVector<l1t::Jet> > stage1Jets;
 
   std::vector<pat::Jet> goodJets;
+  std::vector<pat::Jet> goodJetsAK8;
   
   edm::Handle<vector<pat::PackedCandidate> >pfCands;
   edm::Handle<EcalTrigPrimDigiCollection> ecalTPGs;
@@ -132,7 +157,24 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
     }
   }
   else
-    std::cout<<"Error getting reco taus"<<std::endl;
+    std::cout<<"Error getting reco jets"<<std::endl;
+
+  Handle<vector<pat::Jet> > jetsAK8;
+  if(evt.getByToken(jetSrcAK8_, jetsAK8)){//Begin Getting Reco Taus
+    for (const pat::Jet &jetAK8 : *jetsAK8) {
+      recoJetAK8_pt->Fill( jetAK8.pt() );
+      recoJetAK8_eta->Fill( jetAK8.eta() );
+      recoJetAK8_phi->Fill( jetAK8.phi() );
+      //get rid of the cruft for analysis to save disk space
+      if(jetAK8.pt() > recoPt_ ) {
+	goodJetsAK8.push_back(jetAK8);
+
+      }
+    }
+  }
+  else
+    std::cout<<"Error getting AK8 jets"<<std::endl;
+
 
   ////
   vector<l1extra::L1JetParticle> l1JetSorted;
@@ -213,7 +255,7 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
     
     ////Make efficiencies
     for(unsigned int i = 0; i < goodJets.size(); i++){
-      nvtx = 0;
+      //nvtx = 0;
       pat::Jet recoJet = goodJets.at(i);
       
       ////Fill Reco Objects
@@ -237,8 +279,41 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
       }
       if(l1Matched==0)
 	std::cout<<"Not Matched!"<<std::endl;
+
       efficiencyTree->Fill();
     }
+
+    ////Make efficiencies
+    for(unsigned int i = 0; i < goodJetsAK8.size(); i++){
+      //nvtx = 0;
+      pat::Jet recoJet = goodJetsAK8.at(i);
+      
+      ////Fill Reco Objects
+      recoPtAK8  = recoJet.pt();
+      recoEtaAK8 = recoJet.eta();
+      recoPhiAK8 = recoJet.phi();
+      
+      //Fill L1 Objects
+      l1MatchedAK8 = -1; 
+      jetPtAK8 = 0; jetEtaAK8 = -99; jetPhiAK8 = -99; 
+      
+      for(uint32_t k = 0; k<l1JetSorted.size(); k++){
+	double dR = deltaR( recoJet.p4(), l1JetSorted.at(k).p4());
+	if( dR < deltaR_){
+	  jetPtAK8  = l1JetSorted.at(k).pt();
+	  jetEtaAK8 = l1JetSorted.at(k).eta();
+	  jetPhiAK8 = l1JetSorted.at(k).phi();
+	  l1MatchedAK8 = 1;
+	  break;
+	}
+      }
+      if(l1Matched==0)
+	std::cout<<"Not Matched!"<<std::endl;
+
+      efficiencyTreeAK8->Fill();
+    }
+
+
   }
 
 }

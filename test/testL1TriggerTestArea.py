@@ -72,7 +72,7 @@ else :
 
 
 # To get L1 CaloParams
-process.load('L1Trigger.L1TCalorimeter.caloStage2Params_cfi')
+process.load('L1Trigger.L1TCalorimeter.caloStage2Params_2016_v2_1_cfi')
 # To get CaloTPGTranscoder
 process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)

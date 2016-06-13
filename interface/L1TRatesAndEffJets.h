@@ -96,7 +96,13 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   TH1F* recoJet_eta;
   TH1F* recoJet_phi;
 
+  TH1F* recoJetAK8_pt;
+  TH1F* recoJetAK8_eta;
+  TH1F* recoJetAK8_phi;
+
+
   TTree* efficiencyTree;
+  TTree* efficiencyTreeAK8;
   TFileDirectory folder;
 
   int run, lumi, event;
@@ -104,6 +110,11 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   double recoPt, recoEta, recoPhi;
   double nvtx;
   int l1Matched;
+  int l1MatchedAK8;
+
+  double jetPtAK8, jetEtaAK8, jetPhiAK8;
+  double recoPtAK8, recoEtaAK8, recoPhiAK8;
+
 
  protected:
   // Analyze
@@ -130,6 +141,7 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   edm::EDGetTokenT<HcalTrigPrimDigiCollection> hcalSrc_;
   edm::EDGetTokenT<reco::VertexCollection> vtxLabel_;
   edm::EDGetTokenT<vector<pat::Jet> > jetSrc_;
+  edm::EDGetTokenT<vector<pat::Jet> > jetSrcAK8_;
   edm::EDGetTokenT<BXVector <l1t::Jet> > stage1JetSource_;
   edm::EDGetTokenT<BXVector <l1t::Jet> > stage2JetSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraJets_;

@@ -172,9 +172,9 @@ process.TFileService = cms.Service(
 process.p = cms.Path(process.RawToDigi * process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator * process.l1NtupleProducer)
 
 
-process.out = cms.OutputModule("PoolOutputModule",
-    fileName = cms.untracked.string("l1TFullEvent.root"),
-    outputCommands = cms.untracked.vstring('keep *_*_*_RAW2DIGI') #'keep *_*_*_L1TCaloSummaryTest')
-#    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
-)
-process.e = cms.EndPath(process.out)
+#process.out = cms.OutputModule("PoolOutputModule",
+#    fileName = cms.untracked.string("l1TFullEvent.root"),
+#    outputCommands = cms.untracked.vstring('keep *_*_*_RAW2DIGI') #'keep *_*_*_L1TCaloSummaryTest')
+##    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
+#)
+#process.e = cms.EndPath(process.out)

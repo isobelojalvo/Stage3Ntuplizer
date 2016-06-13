@@ -380,7 +380,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     std::cout<<"Finished initializing the tpg maps"<<std::endl;
     ////Make efficiencies
     for(unsigned int i = 0; i < goodTaus.size(); i++){
-      nvtx = 0;
+      //nvtx = 0;
       if(evt.getByToken(vtxLabel_, vertices)){
 	nvtx = (double)vertices->size();
 	//std::cout<<"nvtx "<<nvtx<<std::endl;
