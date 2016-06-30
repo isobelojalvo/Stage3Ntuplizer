@@ -3,12 +3,9 @@ import FWCore.ParameterSet.Config as cms
 
 from Configuration.StandardSequences.Eras import eras
 
-process = cms.Process("L1TCaloSummaryTest")
-
-import EventFilter.L1TXRawToDigi.util as util
+process = cms.Process('RAW2DIGI',eras.Run2_2016)
 
 from FWCore.ParameterSet.VarParsing import VarParsing
-
 
 options = VarParsing()
 options.register('runNumber', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, 'Run to analyze')
@@ -19,11 +16,15 @@ options.register('inputFileList', '', VarParsing.multiplicity.singleton, VarPars
 options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'Use ORCON for conditions.  This is necessary for very recent runs where conditions have not propogated to Frontier')
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
+options.register('jets',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between jets and taus')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
 options.parseArguments()
 
 if options.rates is False :
-    from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    if options.jets is False :
+        from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    else :
+        from L1Trigger.Stage3Ntuplizer.QCD_PT_15to3000_cfi import *
 
 def formatLumis(lumistring, run) :
     lumis = (lrange.split('-') for lrange in lumistring.split(','))
@@ -44,25 +45,16 @@ if options.farmout is False :
 
 print 'Ok, time to analyze'
 
-#secondaryMap = {
-#    "root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/MINIAOD/05Oct2015-v1/10000/04EDCDA3-916F-E511-AD11-0025905938B4.root": [
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/28774BB9-EF66-E511-A328-02163E011CC3.root',
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/8A42A2DA-EF66-E511-AC62-02163E012988.root',
-#        'root://cms-xrd-global.cern.ch//store/data/Run2015D/SingleMuon/RAW/v1/000/257/487/00000/C24B52CB-EF66-E511-969B-02163E0119F6.root']
-#}
-
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
-process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 process.load('Configuration.Geometry.GeometryExtended2016Reco_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-
 
 from Configuration.AlCa.GlobalTag import GlobalTag
 if options.data is True :
@@ -70,55 +62,53 @@ if options.data is True :
 else :
     process.GlobalTag = GlobalTag(process.GlobalTag, '80X_mcRun2_asymptotic_v6', '')
 
+# Production Info
+process.configurationMetadata = cms.untracked.PSet(
+    annotation = cms.untracked.string('l1Ntuple nevts:100'),
+    name = cms.untracked.string('Applications'),
+    version = cms.untracked.string('$Revision: 1.19 $')
+)
 
-# To get L1 CaloParams
-process.load('L1Trigger.L1TCalorimeter.caloStage2Params_2016_v2_1_cfi')
-# To get CaloTPGTranscoder
-process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
-process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 
-
-#from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
-#process = L1TEventSetupForHF1x1TPs(process)
+from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
+process = L1TEventSetupForHF1x1TPs(process)
 
 process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
-
 process.simEcalTriggerPrimitiveDigis.Label = 'ecalDigis'
 process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(
     cms.InputTag('hcalDigis'),
     cms.InputTag('hcalDigis')
     )
-process.L1TReEmul = cms.Sequence(process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator)
 
-process.load('L1Trigger.Configuration.SimL1Emulator_cff')
-process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
-process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
-
-process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
+from SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff import *
+from L1Trigger.L1TCaloLayer1.simCaloStage2Layer1Digis_cfi import simCaloStage2Layer1Digis
+from L1Trigger.L1TCalorimeter.simCaloStage2Digis_cfi import simCaloStage2Digis
 
 process.load("L1Trigger.Stage3Ntuplizer.l1TriggerTestAreaStage2_cfi")
+
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
+process.l1NtupleProducer.folderName = cms.untracked.string("Stage2Taus")
 
-process.uct2016EmulatorDigis.useECALLUT = cms.bool(True)
-process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
-process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
-process.uct2016EmulatorDigis.useLSB = cms.bool(True)
-process.uct2016EmulatorDigis.verbose = cms.bool(False)
-process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
-process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(0.3)
+process.simDtTriggerPrimitiveDigis.digiTag = 'muonDTDigis'  
+process.simCscTriggerPrimitiveDigis.CSCComparatorDigiProducer = cms.InputTag( 'muonCSCDigis', 
+                                                                              'MuonCSCComparatorDigi')
+process.simCscTriggerPrimitiveDigis.CSCWireDigiProducer       = cms.InputTag( 'muonCSCDigis', 
+                                                                              'MuonCSCWireDigi' )  
+#process.simTwinMuxDigis.RPC_Source         = cms.InputTag('muonRPCDigis')
+# When available, this will switch to TwinMux input Digis:
+#process.simTwinMuxDigis.DTDigi_Source      = cms.InputTag("dttfDigis")
+#process.simTwinMuxDigis.DTThetaDigi_Source = cms.InputTag("dttfDigis")
+#process.simOmtfDigis.srcRPC                = cms.InputTag('muonRPCDigis')
+#process.simBmtfDigis.DTDigi_Source         = cms.InputTag("simTwinMuxDigis")
+#process.simBmtfDigis.DTDigi_Theta_Source   = cms.InputTag("dttfDigis")
+#process.simEmtfDigis.CSCInput              = cms.InputTag("csctfDigis")
+#process.simOmtfDigis.srcCSC                = cms.InputTag("csctfDigis")
+process.simCaloStage2Layer1Digis.ecalToken = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 
-#unpack the data or use the readout
-if options.data is True :
-    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("l1tCaloLayer1Digis")
-    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("l1tCaloLayer1Digis")
-else :
-    process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-    process.l1NtupleProducer.hcalDigis = cms.InputTag("hcalDigis")
-    process.uct2016EmulatorDigis.ecalToken = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
-    process.uct2016EmulatorDigis.hcalToken = cms.InputTag("hcalDigis")
-    
+
+
 if options.farmout is True :
     process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
@@ -142,10 +132,7 @@ process.TFileService = cms.Service(
     fileName = cms.string("l1TNtuple2.root")
     )
 
-if options.data is True :
-    process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
-else :
-    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+process.p = cms.Path(process.RawToDigi*process.simHcalTriggerPrimitiveDigis * process.simCaloStage2Layer1Digis * process.simCaloStage2Digis * process.l1NtupleProducer)
 
 #process.p = cms.Path(process.L1TReEmul*process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
