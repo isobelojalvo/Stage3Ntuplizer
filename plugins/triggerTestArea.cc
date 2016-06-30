@@ -202,6 +202,11 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
    run = evt.id().run();
    lumi = evt.id().luminosityBlock();
    event = evt.id().event();
+
+   runJ = evt.id().run();
+   lumiJ = evt.id().luminosityBlock();
+   eventJ = evt.id().event();
+
    edm::Handle<reco::VertexCollection> vertices;
    if(evt.getByToken(vtxLabel_, vertices)){
      nvtx = vertices->size();
@@ -214,6 +219,7 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
    
    edm::Handle < L1GctJetCandCollection > l1IsoTauJets;
    edm::Handle < L1GctJetCandCollection > l1TauJets;
+
    edm::Handle < BXVector<l1t::Tau> > stage2Taus;
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
@@ -291,7 +297,21 @@ void triggerTestArea::analyze( const Event& evt, const EventSetup& es )
       if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(*rlxTau);
       if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(*rlxTau);
     }
-  }
+  }//next check if there are stage2 taus
+  else if(evt.getByToken(l1Stage2TauSource_, stage2Taus)){
+    std::cout<<"found rlx stage 2 taus size: "<< stage2Taus->size() <<std::endl;
+    for(BXVector<l1t::Tau>::const_iterator rlxTau = stage2Taus->begin(); rlxTau != stage2Taus->end(); rlxTau++ ) {
+      //make this int l1extra::L1JetParticle
+      if(rlxTau->hwIso() > 0){
+	std::cout<<"rlxTau Pt "<<rlxTau->pt()<<" eta: "<<rlxTau->eta()<<" phi: "<<rlxTau->phi()<<std::endl;
+	l1extra::L1JetParticle tempJet(rlxTau->p4());
+	rlxTauSorted.push_back(tempJet);
+	if(abs(rlxTau->eta()) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(tempJet);
+      }
+    }
+  }  
+
   
   std::sort(rlxTauSorted.begin(),rlxTauSorted.end(),compareByPtTrig);
   std::sort(rlxTauSortedEtaRestricted2p4.begin(),rlxTauSortedEtaRestricted2p4.end(),compareByPtTrig);
