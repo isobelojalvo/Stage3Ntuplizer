@@ -32,15 +32,15 @@ elif len(options.inputFileList) > 0 :
 else :
     inputFiles = cms.untracked.vstring(options.inputFiles)
 
-if len(options.inputSecondaryFiles) is 0 and options.inputFileList is '' :
-    inputSecondaryFiles = util.getFilesForRun(options.runNumber, options.dataStream)
-elif len(options.inputFileList) > 0 :
-    with open(options.inputFileList) as f :
-        inputSecondaryFiles = list((line.strip() for line in f))
-else :
-    inputSecondaryFiles = cms.untracked.vstring(options.inputSecondaryFiles)
-if len(inputFiles) is 0 :
-    raise Exception('No files found for dataset %s run %d' % (options.dataStream, options.runNumber))
+#if len(options.inputSecondaryFiles) is 0 and options.inputFileList is '' :
+#    inputSecondaryFiles = util.getFilesForRun(options.runNumber, options.dataStream)
+#elif len(options.inputFileList) > 0 :
+#    with open(options.inputFileList) as f :
+#        inputSecondaryFiles = list((line.strip() for line in f))
+#else :
+#    inputSecondaryFiles = cms.untracked.vstring(options.inputSecondaryFiles)
+#if len(inputFiles) is 0 :
+#    raise Exception('No files found for dataset %s run %d' % (options.dataStream, options.runNumber))
 print 'Ok, time to analyze'
 
 secondaryMap = {
@@ -63,8 +63,56 @@ secondaryMap = {
     "file:pickEventsHighL1LowReco-MINI.root":[
         "file:pickEventsHighL1LowReco.root"
         ],
+    "file:pickevents-highPU-MINI.root":[
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/FE388856-AC9C-E511-A0F5-0CC47A4C8E0E.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/DE6A120B-A29C-E511-BBE8-00261894397F.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/ECC3251C-AD9C-E511-871C-002590593878.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/0A6BACC1-A79C-E511-8606-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/129E931E-B09C-E511-93F4-0CC47A4D76BE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/2210B287-AB9C-E511-A185-0CC47A4C8F08.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A51B3AC-A89C-E511-9D46-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A8DA380-A89C-E511-B535-0CC47A4D767E.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4CD53D8A-AB9C-E511-BFD7-0026189438E8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/526D5BBE-B19C-E511-944F-0025905A60CA.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/76E9CDE3-B09C-E511-89FE-0CC47A4D76AA.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/86E0E6B3-B19C-E511-A614-0025905A6070.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/9A2BE4C4-B29C-E511-822B-0025905A6094.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/A686A218-AD9C-E511-A313-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AE68D4BE-B39C-E511-9C34-0025905A60CE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AEC19F8E-B59C-E511-922E-0CC47A4D764C.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B266BEBF-B29C-E511-9187-0CC47A4D76BE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C650DB-A69C-E511-9331-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C09325-AC9C-E511-A90F-0025905B8568.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/0A6BACC1-A79C-E511-8606-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/129E931E-B09C-E511-93F4-0CC47A4D76BE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/2210B287-AB9C-E511-A185-0CC47A4C8F08.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A51B3AC-A89C-E511-9D46-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4A8DA380-A89C-E511-B535-0CC47A4D767E.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4CD53D8A-AB9C-E511-BFD7-0026189438E8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/4E453CB9-B19C-E511-A8E7-0025905A60B2.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/526D5BBE-B19C-E511-944F-0025905A60CA.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/56397245-579D-E511-86E9-002590596490.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/5CC6B4BE-B39C-E511-8F25-0CC47A4C8F26.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/76E9CDE3-B09C-E511-89FE-0CC47A4D76AA.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/86E0E6B3-B19C-E511-A614-0025905A6070.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/9A2BE4C4-B29C-E511-822B-0025905A6094.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/A686A218-AD9C-E511-A313-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AE68D4BE-B39C-E511-9C34-0025905A60CE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/AEC19F8E-B59C-E511-922E-0CC47A4D764C.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B0C650DB-A69C-E511-9331-0CC47A4C8EA8.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/B266BEBF-B29C-E511-9187-0CC47A4D76BE.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/D677880C-579D-E511-8E39-0CC47A4C8E86.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/DE6A120B-A29C-E511-BBE8-00261894397F.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/E0D6879B-B59C-E511-A752-0CC47A4D761A.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/ECC3251C-AD9C-E511-871C-002590593878.root",
+        "root://cmsxrootd.hep.wisc.edu//store/mc/RunIIFall15DR76/GluGluHToTauTau_M125_13TeV_powheg_pythia8/GEN-SIM-RAW/25nsFlat10to25TSG_76X_mcRun2_asymptotic_v12-v1/50000/FE388856-AC9C-E511-A0F5-0CC47A4C8E0E.root"
+        #"file:pickevents-highPU-RAW.root"
+        ],
     "file:pickEvent-769674-MINI.root":[
         "file:pickEvent-769674-RAW.root"
+        ],
+    "file:pickevents-Stage-3-Only-QCD-MINI.root":[
+        "file:pickevents-Stage-3-Only-QCD-RAW.root"
         ],
     "file:pickEvent-547237-MINI.root":[
         "file:pickEvent-547237-RAW.root"
@@ -109,8 +157,9 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring(inputFiles),
-                            #secondaryFileNames = cms.untracked.vstring(secondaryMap[options.inputFiles[0]]),
-                            secondaryFileNames = cms.untracked.vstring(inputSecondaryFiles),
+                            secondaryFileNames = cms.untracked.vstring(secondaryMap[options.inputFiles[0]]),
+                            #secondaryFileNames = cms.untracked.vstring(inputSecondaryFiles),
+                            #secondaryFileNames = cms.untracked.vstring("file:pickevents-highPU-RAW.root"),
                             #secondaryFileNames = cms.untracked.vstring("file:/data/ojalvo/localFiles/Run2015D/SingleMuon/RECO/16Dec2015-v1/10016/FAF49A05-DCA7-E511-8A3A-0CC47A4D7614.root")
 )
 

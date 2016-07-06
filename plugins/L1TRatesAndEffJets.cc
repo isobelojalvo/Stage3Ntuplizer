@@ -35,6 +35,8 @@ L1TRatesAndEffJets::L1TRatesAndEffJets( const ParameterSet & cfg ) :
   vtxLabel_(consumes<reco::VertexCollection>(cfg.getParameter<edm::InputTag>("vertices"))),
   jetSrc_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJets"))),
   jetSrcAK8_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJetsAK8"))),
+  //jetSrcAOD_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJetsAOD"))),
+  //jetSrcAODAK8_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJetsAODAK8"))),
   stage1JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage1JetSource"))),
   stage2JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage2JetSource"))),
   l1ExtraJets_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraJetSource")))
@@ -155,7 +157,21 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
 
       }
     }
-  }
+  }/*
+  else if(evt.getByToken(jetSrcAOD_, jetsAOD)){
+    //vector<reco::PFJet>
+    std::cout<<"Got PFJets"<<std::endl;
+    for (const reco::PFJet &jet : *jetsAOD) {
+      recoJet_pt->Fill( jet.pt() );
+      recoJet_eta->Fill( jet.eta() );
+      recoJet_phi->Fill( jet.phi() );
+      pat::Jet tempJet(jet);//should work
+      if(jet.pt() > recoPt_ ) {
+	goodJets.push_back(jet);
+
+      }
+    }
+    }*/
   else
     std::cout<<"Error getting reco jets"<<std::endl;
 
@@ -273,6 +289,7 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
 	  jetPt  = l1JetSorted.at(k).pt();
 	  jetEta = l1JetSorted.at(k).eta();
 	  jetPhi = l1JetSorted.at(k).phi();
+	  //std::cout<<"recoJet PT:"<<recoPt<<" l1Jet PT:"<<jetPt<<std::endl;
 	  l1Matched = 1;
 	  break;
 	}

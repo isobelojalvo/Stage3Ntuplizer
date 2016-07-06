@@ -16,6 +16,7 @@ mkdir -p /data/ojalvo/ggHttMC-2-SUBStage2/dags/daginputs
 farmoutAnalysisJobs --assume-input-files-exist  --input-file-list=ggHtt-76X-TSG-MINI.txt \
 --submit-dir=/data/ojalvo/ggHttMC-2-SUBStage2/submit \
 --output-dag-file=/data/ojalvo/ggHttMC-2-SUBStage2/dags/dag \
+--vsize-limit=7000 \
 ggHttMC-2  \
 $CMSSW_BASE  \
 $CMSSW_BASE/src/L1Trigger/Stage3Ntuplizer/test/SUBStage2.py farmout=True rates=False data=False

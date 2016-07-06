@@ -19,11 +19,15 @@ options.register('inputFileList', '', VarParsing.multiplicity.singleton, VarPars
 options.register('useORCON', False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'Use ORCON for conditions.  This is necessary for very recent runs where conditions have not propogated to Frontier')
 options.register('farmout',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'options to set up cfi it is able to submit to condor')
 options.register('data',True, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between data and mc')
+options.register('jets',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between jets and taus')
 options.register('rates',False, VarParsing.multiplicity.singleton, VarParsing.varType.bool, 'option to switch between rates and eff (no secondary file map)')
 options.parseArguments()
 
 if options.rates is False :
-    from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    if options.jets is False :
+        from L1Trigger.Stage3Ntuplizer.ggH_TSG_SecondaryFiles_cfi import *
+    else :
+        from L1Trigger.Stage3Ntuplizer.QCD_PT_15to3000_cfi import *
 
 def formatLumis(lumistring, run) :
     lumis = (lrange.split('-') for lrange in lumistring.split(','))
