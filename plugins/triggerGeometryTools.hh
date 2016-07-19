@@ -59,9 +59,7 @@ float getRecoEta(int ieta, short zside){
     exit(0);
   }
   
-  if(zside == 1)
-    eta = towerEtaMap[ieta];
-  else if(zside == -1)
+  if(zside == 1||zside == -1)
     eta = towerEtaMap[ieta];
   else{
     std::cout<<"Error!!! zside out of bounds in triggerGeometryTools.h "<<std::endl;

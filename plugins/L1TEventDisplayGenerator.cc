@@ -316,13 +316,22 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
     std::cout<<"ERROR GETTING THE REGIONS!!!"<<std::endl;}
   else{
     for(vector<L1CaloRegion>::const_iterator region = regions->begin(); region != regions->end(); ++region){
-      UCTRegionProcess uctRegion(*region);
+      //UCTRegionProcess uctRegion(*region);
+      //UCTRegion uctregion;
+      //uctregion.rawData() = region.rawData();
+      UCTGeometry g;
+      UCTRegionIndex regionIndex = g.getUCTRegionIndexFromL1CaloRegion(region->id().ieta(), region->id().iphi());
+      UCTTowerIndex towerIndex = g.getUCTTowerIndexFromL1CaloRegion(regionIndex, region->raw());
       if(region->et()>0){
+	//std::cout<<"region ieta "<<region->id().ieta()<<" region iphi "<<region->id().iphi()<<std::endl;
+	//std::cout<<"tower ieta "<<towerIndex.first<<" tower iphi "<<towerIndex.second<<std::endl;
 	float pt = (region->et());
 	
-	float eta = uctRegion.getFineRecoEta();
+	float eta = g.getUCTTowerEta(towerIndex.first);
 	
-	float phi = uctRegion.getFineRecoPhi();
+	float phi = g.getUCTTowerPhi(towerIndex.second);
+	//if(abs(eta)>3)
+	//std::cout<<"region with eta "<<eta<<" pt "<< pt<<std::endl;
 	TLorentzVector temp ;
 	temp.SetPtEtaPhiE(pt,eta,phi,pt);
 	allRegions->push_back(temp);
@@ -337,8 +346,8 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
 
       int cal_ieta = (*ecalTPGs)[i].id().ieta();
       int cal_iphi = (*ecalTPGs)[i].id().iphi();
-      if(cal_iphi==0)
-	std::cout<<"cal_phi is 0"<<std::endl;
+      //if(cal_iphi==0)
+      //std::cout<<"cal_phi is 0"<<std::endl;
       if(cal_ieta<-28)
 	continue;
       if(cal_ieta>28)
@@ -355,8 +364,6 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
       }
       float eta = getRecoEta(ieta, zside);
       float phi = getRecoPhi(cal_iphi);    
-      //if(et>0)
-      //std::cout<<"et "<<et<<std::endl;
       TLorentzVector temp ;
       temp.SetPtEtaPhiE(et,eta,phi,et);
       //if(et>5)
@@ -371,23 +378,37 @@ void L1TEventDisplayGenerator::analyze( const Event& evt, const EventSetup& es )
       HcalTriggerPrimitiveDigi tpg = (*hcalTPGs)[i];
       int cal_ieta = tpg.id().ieta();
       int cal_iphi = tpg.id().iphi();
-      if(cal_ieta>28)continue; 
-      if(cal_ieta<-28)continue; 
-      int ieta = TPGEtaRange(cal_ieta);
+      float eta = 0;
+      float phi = 0;
       short absieta = std::abs(tpg.id().ieta());
       short zside = tpg.id().zside();
-      double et = hcalScale->et(tpg.SOI_compressedEt(), absieta, zside); 
-      //if(et>0)
-      //std::cout<<"HCAL ET "<<et<<std::endl;
-      if(ieta<0){
-	std::cout<<"sorry, ieta less than 1 :("<<std::endl;
-	std::cout<<"cal_ieta "<<cal_ieta<<" ieta "<<ieta<<std::endl;
+      //double et = hcalScale->et(tpg.SOI_compressedEt(), absieta, zside); 
+      double et = tpg.SOI_compressedEt(); 
+
+      if(cal_ieta>28){
+	//eta = getRecoHF(cal_ieta);
+	UCTGeometry g;
+	eta = g.getUCTTowerEta(cal_ieta);
+	//if(cal_ieta>32&&et>0)
+	//std::cout<<"cal_ieta "<<cal_ieta<<" eta "<<eta<< " et:" << et<<std::endl;
       }
-      float eta = getRecoEta(ieta, zside);
-      float phi = getRecoPhi(cal_iphi);    
+      if(cal_ieta<-28){
+	UCTGeometry g;
+	eta = g.getUCTTowerEta(cal_ieta);
+	//std::cout<<"cal_ieta "<<cal_ieta<<" eta "<<eta<< " et:" << et<<std::endl;
+      }
+      if(cal_ieta<29&&cal_ieta>-29){
+	int ieta = TPGEtaRange(cal_ieta);
+	eta = getRecoEta(ieta, zside);
+      }
+      
+      phi = getRecoPhi(cal_iphi);    
       TLorentzVector temp ;
       temp.SetPtEtaPhiE(et,eta,phi,et);
-      allHcalTPGs->push_back(temp);
+      if(et>0){
+	//std::cout<<"cal_ieta "<<cal_ieta<<" eta "<<eta<< " phi " << phi << " et:" << et<<std::endl;
+	allHcalTPGs->push_back(temp);
+      }
     }
 
   efficiencyTree->Fill();
@@ -517,24 +538,7 @@ void L1TEventDisplayGenerator::initializeECALTPGMap(Handle<EcalTrigPrimDigiColle
       //if(energy>0)
       //std::cout<<"hcal iphi "<<iphi<<" ieta "<<ieta<<" energy "<<energy<<std::endl;
       hTowerETMap[iphi][ieta] = energy;
-      //TPGSum_ +=energy;
-      //TPGH_ += energy;
-      //double alpha_h = TPGSFp_[cal_ieta]; //v3
-      //hCorrTowerETMap[cal_iphi][cal_ieta] = alpha_h*energy;
-      //cTPGH_ += alpha_h*energy;
-      //if (energy > 0) {
-      //std::cout << "hcal eta/phi=" << ieta << "/" << iphi
-      //<< " = (" << getEtaTPG(ieta) << "/" << getPhiTPG(iphi) << ") "
-      //<< " et=" << (*hcal)[i].SOI_compressedEt()
-      //<< " energy=" << energy
-      //<< " rctEta="<< twrEta2RegionEta(cal_ieta) << " rctPhi=" << twrPhi2RegionPhi(cal_iphi)
-      //<< " fg=" << (*hcal)[i].SOI_fineGrain() << std::endl;
-      //}
-      //if (energy>maxTPGHPt){
-      //maxTPGHPt=energy;
-      //maxTPGHPt_phi = cal_iphi; //this one starts at 0-72
-      //maxTPGHPt_eta = cal_ieta; //this one is 0-54
-      //} 
+
     }
     //else
       //std::cout<<"HCAL failed checks iphi "<<iphi<<" ieta "<<ieta<<std::endl;

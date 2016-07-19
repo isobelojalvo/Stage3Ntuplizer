@@ -312,6 +312,40 @@ int get5x5TPGs(const int maxTPGPt_eta,
     }
   }
 
+  float getRecoHF(int cal_ieta){
+    switch(cal_ieta){
+    case 30:
+      return 2.964;
+    case 31:
+      return 3.139;
+    case 32:
+      return 3.314;
+    case 33:
+      return 3.489;
+    case 34:
+      return 3.664;
+    case 35:
+      return 3.839;
+    case 36:
+      return 4.013;
+    case 37:
+      return 4.191;
+    case 38:
+      return 4.363;
+    case 39:
+      return 4.538;
+    case 40:
+      return 4.716;
+    case 41:
+      return 4.889;
+    case 42:
+      return 5.191;
+    default:
+      //ERROR!!! Invalid HF Eta value: 28
+      std::cout<<"ERROR!!! Invalid HF Eta value: "<<cal_ieta<<std::endl;
+      exit(0);
+    }
+  }
 
 };
 

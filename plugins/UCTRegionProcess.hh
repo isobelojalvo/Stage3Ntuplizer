@@ -56,25 +56,121 @@ public:
     uint32_t fineLocationEtaBit = ((location() & 0xC)>>2);
 
     int rctEta = (this->id().ieta());
-
-    towereta = (rctEta - 11) * 4 + fineLocationEtaBit ;
-    if(rctEta<11){
-      towereta = -((10 - rctEta ) * 4 + fineLocationEtaBit +1) ;
-    }
-    towereta = towereta + 28;
-    //std::cout<<"rctEta "<< rctEta<< " raw " << this->raw() <<" fineLocationetabit "<<fineLocationEtaBit << " tower eta "<<towereta<< " towerEtaMap " << towerEtaMap[towereta]<<std::endl;
-    if((towereta > -1 && towereta < 57))
-      {
-	eta = towerEtaMap[towereta];
-	return eta;
+    //RCT/GCT (legacy) uses 0-3 (-HF), 4-17 (-E/-B/+B/+E), 18-21 (+HF).  For Layer1, I propose 0-3(-HF(4regions), 4-17 (-E/-B/+B/+E), 18-23 (+HF), 30(-HF last-but-one), 31 (-HF last).
+    if(rctEta<24||rctEta==30||rctEta==31){
+      switch (rctEta){
+      case 0:
+	towereta = rctEta*2 + fineLocationEtaBit;
+	break;
+      case 1:
+	towereta = rctEta*2 + fineLocationEtaBit;
+	break;
+      case 2:
+	towereta = rctEta*2 + fineLocationEtaBit;
+	break;
+      case 3:
+	towereta = rctEta*2 + fineLocationEtaBit;
+	break;
+      case 4:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 5:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 6:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 7:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 8:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 9:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 10:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 11:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 12:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 13:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 14:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 15:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 16:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 17:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 18:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 19:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 20:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 21:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 22:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 23:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 24:
+	towereta = rctEta*4 - 7 + fineLocationEtaBit;
+	break;
+      case 30:
+	towereta = (rctEta-6)*4 + fineLocationEtaBit;
+	break;
+      case 31:
+	towereta = (rctEta-6)*4 + fineLocationEtaBit;
+	break;
+      default:
+	std::cout<<"Error RCT Eta value is not valid, rctEta: "<<rctEta<<std::endl;
+	exit(0);
       }
+      eta = towerEtaMap[towereta];
+    }
+
+    /*
+    if(rctEta<24){
+      towereta = (rctEta - 15) * 4 + fineLocationEtaBit ;
+      if(rctEta<){
+	towereta = -((10 - rctEta ) * 4 + fineLocationEtaBit +1) ;
+      }
+      towereta = towereta + 28;
+      //std::cout<<"rctEta "<< rctEta<< " raw " << this->raw() <<" fineLocationetabit "<<fineLocationEtaBit << " tower eta "<<towereta<< " towerEtaMap " << towerEtaMap[towereta]<<std::endl;
+      if((towereta > -1 && towereta < 57))
+	{
+	  eta = towerEtaMap[towereta];
+	  return eta;
+	  }*/
+
     else{
+      //Error!!! towereta out of bounds in UCTREgionProcess.h
+      //rctEta 1 towereta -9 hit2BitEta 0
       eta = -999;
       std::cout<<"Error!!! towereta out of bounds in UCTREgionProcess.h "<<std::endl;
       std::cout<<"rctEta "<<rctEta<<" towereta "<<towereta<<" hit2BitEta "<<fineLocationEtaBit<<std::endl;
       std::cout<<"exiting..."<<std::endl;
       exit(0);
     }
+
     return eta;
 
   }
@@ -105,8 +201,18 @@ public:
 
 
 //from tower eta -28 to 28
-float towerEtaMap[57]=   { 
-    -2.913, //-2.739, 
+float towerEtaMap[78]=   { 
+  -5.191,
+  -4.886,
+  -4.716,
+  -4.538,
+  -4.363,
+  -4.191,
+  -3.839,
+  -3.664,
+  -3.489
+  -3.139,
+  -2.913, //-2.739, 
     -2.565, -2.391, 2.217, 	//switch to smaller trigger towers here    
     -2.0445, -1.9575, -1.8705, -1.7835, -1.6965, 
     -1.6095, -1.5225, -1.4355, -1.3485, -1.2615, 
@@ -119,7 +225,15 @@ float towerEtaMap[57]=   {
     1.4355, 1.5225, 1.6095, 1.6965, 1.7835, 
     1.8705, 1.9575, 2.0445, 2.217, 2.391, 
     2.565, //2.739,
-    2.913 
+  2.913,
+  3.15,
+  3.50,
+  3.85,
+  4.2,
+  4.38,
+  4.74,
+  -4.38,
+  -4.74
   };
 
   //this is for mapping from RCT only

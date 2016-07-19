@@ -98,7 +98,7 @@ else :
     process.uct2016EmulatorDigis.hcalToken = cms.InputTag("hcalDigis")
 
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(4) )
 
 process.source = cms.Source("PoolSource",
                             fileNames = cms.untracked.vstring(options.inputFiles)
