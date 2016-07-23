@@ -111,28 +111,8 @@ process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
 process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
 process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-process.uct2016EmulatorDigis.tauMiscActivityThreshold = cms.double(options.tauMiscActivityThresh)
-###
-process.uct2016EmulatorDigis.tauLUT00 = cms.vdouble(1)#0-10GeV
-process.uct2016EmulatorDigis.tauLUT01 = cms.vdouble(1)#10-16GeV
-process.uct2016EmulatorDigis.tauLUT02 = cms.vdouble(1)#16-18GeV
-process.uct2016EmulatorDigis.tauLUT03 = cms.vdouble(1)#18-20GeV
-process.uct2016EmulatorDigis.tauLUT04 = cms.vdouble(1)#20-22GeV
-process.uct2016EmulatorDigis.tauLUT05 = cms.vdouble(1)#22-25GeV
-process.uct2016EmulatorDigis.tauLUT06 = cms.vdouble(1)#25-28GeV
-process.uct2016EmulatorDigis.tauLUT07 = cms.vdouble(1)#28-30GeV
-process.uct2016EmulatorDigis.tauLUT08 = cms.vdouble(1)#30-32GeV
-process.uct2016EmulatorDigis.tauLUT09 = cms.vdouble(1)#32-34GeV
-process.uct2016EmulatorDigis.tauLUT10 = cms.vdouble(1)#34-40GeV
-process.uct2016EmulatorDigis.tauLUT11 = cms.vdouble(1)#40-50GeV
-process.uct2016EmulatorDigis.tauLUT12 = cms.vdouble(1)#50-60GeV
-process.uct2016EmulatorDigis.tauLUT13 = cms.vdouble(1)#60-70GeV
-process.uct2016EmulatorDigis.tauLUT14 = cms.vdouble(1)#70-80GeV
-process.uct2016EmulatorDigis.tauLUT15 = cms.vdouble(1)#80-90GeV
-process.uct2016EmulatorDigis.tauLUT16 = cms.vdouble(1)#90-100GeV
-process.uct2016EmulatorDigis.tauLUT17 = cms.vdouble(1)#max is 125 GeV
+process.uct2016EmulatorDigis.miscActivityFraction = cms.double(options.tauMiscActivityThresh)
 
-###
 print "tau Isolation Factor: " 
 print options.tauIsolationFactor
 

@@ -1,4 +1,5 @@
 import os
+
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.StandardSequences.Eras import eras
@@ -56,27 +57,28 @@ process.load('Configuration.EventContent.EventContent_cff')
 process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 process.load('Configuration.Geometry.GeometryExtended2016Reco_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
-process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
 from Configuration.AlCa.GlobalTag import GlobalTag
 if options.data is True :
+    process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
     process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
 else :
+    process.load('Configuration.StandardSequences.RawToDigi_cff')
     process.GlobalTag = GlobalTag(process.GlobalTag, '80X_mcRun2_asymptotic_v6', '')
 
 
 # To get L1 CaloParams
-process.load('L1Trigger.L1TCalorimeter.caloStage2Params_2016_v2_1_cfi')
+process.load('L1Trigger.L1TCalorimeter.caloStage2Params_2016_v2_2_cfi')
 # To get CaloTPGTranscoder
 process.load('SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff')
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 
 
-from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
-process = L1TEventSetupForHF1x1TPs(process)
+#from L1Trigger.Configuration.customiseReEmul import L1TEventSetupForHF1x1TPs,L1TReEmulFromRAW 
+#process = L1TEventSetupForHF1x1TPs(process)
 
 process.load('L1Trigger.Configuration.SimL1Emulator_cff')
 process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
@@ -87,8 +89,6 @@ process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(
     )
 process.L1TReEmul = cms.Sequence(process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator)
 
-process.load('L1Trigger.Configuration.SimL1Emulator_cff')
-process.load('L1Trigger.Configuration.CaloTriggerPrimitives_cff')
 process.load('EventFilter.L1TXRawToDigi.caloLayer1Stage2Digis_cfi')
 
 process.load('L1Trigger.L1TCaloSummary.uct2016EmulatorDigis_cfi')
@@ -110,26 +110,7 @@ process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
 process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
 process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-###
-#process.uct2016EmulatorDigis.pumLUT00 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT01 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT02 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT03 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT04 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT05 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT06 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT07 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT08 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT09 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT10 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT11 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT12 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT13 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT14 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT15 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT16 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-#process.uct2016EmulatorDigis.pumLUT17 = cms.vdouble(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-###
+
 print "tau Isolation Factor: " 
 print options.tauIsolationFactor
 
@@ -173,7 +154,7 @@ else :
 
 #process.p = cms.Path(process.L1TReEmul*process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
 
-#dump_file = open('dump.py','w')
-#dump_file.write(process.dumpPython())
+dump_file = open('dump.py','w')
+dump_file.write(process.dumpPython())
 
 #process.e = cms.EndPath(process.out)
