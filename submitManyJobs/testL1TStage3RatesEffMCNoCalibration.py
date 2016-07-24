@@ -109,9 +109,10 @@ process.uct2016EmulatorDigis.useHCALLUT = cms.bool(True)
 process.uct2016EmulatorDigis.useHFLUT = cms.bool(False)
 process.uct2016EmulatorDigis.useLSB = cms.bool(True)
 process.uct2016EmulatorDigis.verbose = cms.bool(False)
-process.uct2016EmulatorDigis.tauSeed = cms.uint32(10)
+process.uct2016EmulatorDigis.tauSeed = cms.uint32(5)
 process.uct2016EmulatorDigis.tauIsolationFactor = cms.double(options.tauIsolationFactor)
-process.uct2016EmulatorDigis.tauMiscActivityThreshold = cms.double(options.tauMiscActivityThresh)
+process.uct2016EmulatorDigis.miscActivityFraction = cms.double(options.tauMiscActivityThresh)
+
 ###
 process.uct2016EmulatorDigis.tauLUT00 = cms.vdouble(1)#0-10GeV
 process.uct2016EmulatorDigis.tauLUT01 = cms.vdouble(1)#10-16GeV
