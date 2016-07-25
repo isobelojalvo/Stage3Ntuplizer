@@ -90,7 +90,7 @@ from L1Trigger.L1TCaloLayer1.simCaloStage2Layer1Digis_cfi import simCaloStage2La
 from L1Trigger.L1TCalorimeter.simCaloStage2Digis_cfi import simCaloStage2Digis
 
 if options.jets is True :
-    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage3Jets_cfi")
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2Jets_cfi")
 else :
     process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2_cfi")
 
