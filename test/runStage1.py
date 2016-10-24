@@ -74,32 +74,6 @@ process.configurationMetadata = cms.untracked.PSet(
     version = cms.untracked.string('$Revision: 1.19 $')
 )
 
-# Output definition
-
-#process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
-#    dataset = cms.untracked.PSet(
-#        dataTier = cms.untracked.string('FEVT'),
-#        filterName = cms.untracked.string('')
-#    ),
-#    eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-#    fileName = cms.untracked.string('STAGE1_RAW2DIGI.root'),
-#    outputCommands = process.RECOSIMEventContent.outputCommands,
-#    splitLevel = cms.untracked.int32(0)
-#)
-
-# Additional output definition
-
-
-# Path and EndPath definitions
-#process.raw2digi_step = cms.Path(process.RawToDigi)
-#process.endjob_step = cms.EndPath(process.endOfProcess)
-#process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
-
-# Schedule definition
-#process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.RECOSIMoutput_step)
-
-# customisation of the process.
-
 # Automatic addition of the customisation function from L1Trigger.Configuration.customiseReEmul
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAW 
 
@@ -134,13 +108,8 @@ else :
     process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
     process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
     process.l1NtupleProducer.folderName = cms.untracked.string("Stage1Taus")
-#process.l1NtupleProducer.stage2TauSource = cms.InputTag("simCaloStage1FinalDigis","rlxTaus")
 
-#process.L1TReEmulPath = cms.Path(process.L1TReEmul)
-
-#process = L1TReEmulFromRAW(process)
-
-# End of customisation functions
+# End of customization functions
 
 if options.farmout is True :
     process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
@@ -165,16 +134,7 @@ process.TFileService = cms.Service(
     fileName = cms.string("l1TNtuple2.root")
     )
 
-#if options.data is True :
-#    process.p = cms.Path(process.l1tCaloLayer1Digis*process.uct2016EmulatorDigis*process.l1NtupleProducer)
-#else :
-#    process.p = cms.Path(process.RawToDigi*process.L1TReEmul*process.uct2016EmulatorDigis*process.l1NtupleProducer)
+
 process.p = cms.Path(process.RawToDigi * process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator * process.l1NtupleProducer)
 
 
-#process.out = cms.OutputModule("PoolOutputModule",
-#    fileName = cms.untracked.string("l1TFullEvent.root"),
-#    outputCommands = cms.untracked.vstring('keep *_*_*_RAW2DIGI') #'keep *_*_*_L1TCaloSummaryTest')
-##    #outputCommands = cms.untracked.vstring('drop *', 'keep *_l1tCaloLayer1Digis_*_*, keep *_*_*_L1TCaloSummaryTest' )
-#)
-#process.e = cms.EndPath(process.out)
