@@ -58,6 +58,9 @@
 #include "FWCore/Framework/interface/ESHandle.h"
 //#include "L1Trigger/L1TCaloLayer1/src/UCTRegion.hh"
 #include "L1Trigger/Stage3Ntuplizer/plugins/UCTRegionProcess.hh"
+#include "DataFormats/L1GlobalCaloTrigger/interface/L1GctJetCand.h"
+#include "Math/LorentzVector.h"
+#include "DataFormats/Math/interface/LorentzVector.h"
 
 //
 // class declaration
@@ -174,6 +177,7 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
   edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage2TauSource_;
   edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage1TauSource_;
   edm::EDGetTokenT<BXVector <l1t::Tau> > l1Stage1IsoTauSource_;
+  edm::EDGetTokenT<vector <L1GctJetCand> > l1GctTauSource_;
   edm::EDGetTokenT<vector <L1CaloRegion> > regionSource_;
 
   std::string folderName_;
@@ -226,6 +230,7 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
       //4.250,
       //4.750
     };
+
 
     for (int n=1; n<29; n++){
       //std::cout<<"inputEta "<<inputEta<< " n "<< n <<" tpgEtaValues[n-1] "<< tpgEtaValues[n-1] << " abs(inputEta)<tpgEtaValues[n-1]"<<std::endl;
@@ -281,6 +286,59 @@ class L1TRatesAndEff : public edm::EDAnalyzer {
   }
 
 
+  float convertRCTEta(uint32_t inputEta) {
+    const double regionEtaValues[22] = {
+      -4.75,
+      -4.25,
+      -3.75,
+      -3.25,
+      -2.5,
+      -1.93,
+      -1.566,
+      -1.218,
+      -0.87,
+      -0.522,
+      -0.174,
+      0.174,
+      0.522,
+      0.87,
+      1.218,
+      1.566,
+      1.93,
+      2.5,
+      3.25,
+      3.75,
+      4.25,
+      4.75
+    };
+    return regionEtaValues[inputEta];
+  };
+
+
+
+  float convertRCTPhi(uint32_t inputPhi) {
+    const double regionPhiValues[20] = {
+      0.000,
+      0.349,
+      0.698,
+      1.047,
+      1.396,
+      1.744,
+      2.093,
+      2.442,
+      2.791,
+      -3.14159,
+      -2.791,
+      -2.442,
+      -2.093,
+      -1.744,
+      -1.396,
+      -1.047,
+      -0.698,
+      -0.349
+    };
+    return regionPhiValues[inputPhi];
+  };
 };
 
 #endif

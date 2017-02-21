@@ -39,6 +39,8 @@ L1TRatesAndEffJets::L1TRatesAndEffJets( const ParameterSet & cfg ) :
   //jetSrcAODAK8_(consumes<vector<pat::Jet> >(cfg.getParameter<edm::InputTag>("recoJetsAODAK8"))),
   stage1JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage1JetSource"))),
   stage2JetSource_(consumes<BXVector <l1t::Jet> >(cfg.getParameter<edm::InputTag>("stage2JetSource"))),
+  l1GctJetSource_(consumes<vector<L1GctJetCand> > (cfg.getParameter<edm::InputTag>("gctJets"))),
+  l1GctForJetSource_(consumes<vector<L1GctJetCand> > (cfg.getParameter<edm::InputTag>("gctForJets"))),
   l1ExtraJets_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraJetSource")))
   {
 
@@ -122,6 +124,9 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
    event = evt.id().event();
    edm::Handle<reco::VertexCollection> vertices;   
    //edm::Handle < BXVector<l1t::Tau> > stage1IsoTaus;
+
+   edm::Handle < L1GctJetCandCollection > l1GctForJets;
+   edm::Handle < L1GctJetCandCollection > l1GctJets;
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraJets;
   edm::Handle < BXVector<l1t::Jet> > stage2Jets;
@@ -219,6 +224,77 @@ void L1TRatesAndEffJets::analyze( const Event& evt, const EventSetup& es )
       l1extra::L1JetParticle tempJet(l1Jet->p4());
       l1JetSorted.push_back(tempJet);
       if(abs(l1Jet->eta()) < 2.4) l1JetSortedEtaRestricted2p4.push_back(tempJet);
+    }
+  }
+  else if(evt.getByToken(l1GctJetSource_, l1GctJets)){
+    std::cout<<"searching through all the jets"<<std::endl;
+    if(evt.getByToken(l1GctForJetSource_, l1GctForJets))
+      for(vector<L1GctJetCand>::const_iterator gctJet = l1GctForJets->begin(); gctJet != l1GctForJets->end(); gctJet++) {
+	//UCTRegionProcess uctRegion(region);
+	float pt = gctJet->rank();
+	float eta = convertRCTEta(gctJet->regionId().ieta());
+	float phi = convertRCTPhi(gctJet->regionId().iphi());
+	//std::cout<<"rank "<<gctJet->rank()<<" gctEta "<<gctJet->regionId().ieta()<<" gctPhi "<<gctJet->regionId().iphi()<<std::endl;
+	
+	if(gctJet->regionId().ieta()>17 || gctJet->regionId().ieta()<4) continue;
+	if(gctJet->regionId().iphi()>19){std::cout<<"region phi is out of bounds!!"<<std::endl; continue;}
+	
+	if(gctJet->rank()>0){
+	  //std::cout<<"rank "<<gctJet->rank()<<" gctEta "<<gctJet->regionId().ieta()<<" gctPhi "<<gctJet->regionId().iphi()<<std::endl;
+	  //std::cout<<" pt "<<pt<< " eta "<< eta<< " phi "<<phi<<std::endl;
+	  
+	  reco::LeafCandidate::PolarLorentzVector tempLorentz;
+	  tempLorentz.SetPt(pt);
+	  tempLorentz.SetEta(eta);
+	  tempLorentz.SetPhi(phi);
+	  
+	  //std::cout<<"temp lorentz pt  "<<pt<<std::endl;
+	  //std::cout<<"temp lorentz eta "<<eta<<std::endl;
+	  //std::cout<<"temp lorentz phi "<<phi<<std::endl;
+	  
+	  l1extra::L1JetParticle tempJet(tempLorentz);
+	  //std::cout<<"temp jet pt  "<<tempJet.pt()<<std::endl;
+	//std::cout<<"temp jet eta "<<tempJet.eta()<<std::endl;
+	//std::cout<<"temp jet phi "<<tempJet.phi()<<std::endl;
+
+	l1JetSorted.push_back(tempJet);
+	if(abs(eta) < 2.4) l1JetSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(eta) < 2.1) l1JetSortedEtaRestricted2p1.push_back(tempJet);
+      }
+    }
+    if(evt.getByToken(l1GctJetSource_, l1GctJets))
+      for(vector<L1GctJetCand>::const_iterator gctJet = l1GctJets->begin(); gctJet != l1GctJets->end(); gctJet++) {
+	//UCTRegionProcess uctRegion(region);
+	float pt = gctJet->rank();
+      float eta = convertRCTEta(gctJet->regionId().ieta());
+      float phi = convertRCTPhi(gctJet->regionId().iphi());
+      //std::cout<<"rank "<<gctJet->rank()<<" gctEta "<<gctJet->regionId().ieta()<<" gctPhi "<<gctJet->regionId().iphi()<<std::endl;
+      
+      if(gctJet->regionId().ieta()>17 || gctJet->regionId().ieta()<4) continue;
+	if(gctJet->regionId().iphi()>19){std::cout<<"region phi is out of bounds!!"<<std::endl; continue;}
+	
+	if(gctJet->rank()>0){
+	  //std::cout<<"rank "<<gctJet->rank()<<" gctEta "<<gctJet->regionId().ieta()<<" gctPhi "<<gctJet->regionId().iphi()<<std::endl;
+	  //std::cout<<" pt "<<pt<< " eta "<< eta<< " phi "<<phi<<std::endl;
+	  
+	  reco::LeafCandidate::PolarLorentzVector tempLorentz;
+	  tempLorentz.SetPt(pt);
+	  tempLorentz.SetEta(eta);
+	  tempLorentz.SetPhi(phi);
+	  
+	  //std::cout<<"temp lorentz pt  "<<pt<<std::endl;
+	  //std::cout<<"temp lorentz eta "<<eta<<std::endl;
+	  //std::cout<<"temp lorentz phi "<<phi<<std::endl;
+	  
+	  l1extra::L1JetParticle tempJet(tempLorentz);
+	  //std::cout<<"temp jet pt  "<<tempJet.pt()<<std::endl;
+	//std::cout<<"temp jet eta "<<tempJet.eta()<<std::endl;
+	//std::cout<<"temp jet phi "<<tempJet.phi()<<std::endl;
+
+	l1JetSorted.push_back(tempJet);
+	if(abs(eta) < 2.4) l1JetSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(eta) < 2.1) l1JetSortedEtaRestricted2p1.push_back(tempJet);
+      }
     }
   }
   else{

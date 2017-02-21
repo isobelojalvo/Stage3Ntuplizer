@@ -42,6 +42,8 @@ L1TRatesAndEff::L1TRatesAndEff( const ParameterSet & cfg ) :
   l1Stage2TauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage2TauSource"))),
   l1Stage1TauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage1TauSource"))),
   l1Stage1IsoTauSource_(consumes<BXVector<l1t::Tau> > (cfg.getParameter<edm::InputTag>("stage1IsoTauSource"))),
+  l1GctTauSource_(consumes<vector<L1GctJetCand> > (cfg.getParameter<edm::InputTag>("gctTauJets"))),
+  //  vector<L1GctJetCand>                  "gctDigis"                  "tauJets"         "RAW2DIGI"
   regionSource_(consumes<vector <L1CaloRegion> >(cfg.getParameter<edm::InputTag>("UCTRegion")))
   {
 
@@ -170,18 +172,20 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
    edm::Handle < BXVector<l1t::Tau> > stage2Taus;
    edm::Handle < BXVector<l1t::Tau> > stage1Taus;
    edm::Handle < BXVector<l1t::Tau> > stage1IsoTaus;
-
-  edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
-  edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraIsoTaus;
-  
-  std::vector<reco::PFTauRef> goodTausRef;
-  std::vector<pat::Tau> goodTaus;
-  
-  edm::Handle<vector<pat::PackedCandidate> >pfCands;
-  edm::Handle<EcalTrigPrimDigiCollection> ecalTPGs;
-  edm::Handle<HcalTrigPrimDigiCollection> hcalTPGs;
-  
-
+   
+   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
+   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraIsoTaus;
+   
+   edm::Handle < vector <L1GctJetCand> > l1GctTaus;
+   
+   std::vector<reco::PFTauRef> goodTausRef;
+   std::vector<pat::Tau> goodTaus;
+   
+   edm::Handle<vector<pat::PackedCandidate> >pfCands;
+   edm::Handle<EcalTrigPrimDigiCollection> ecalTPGs;
+   edm::Handle<HcalTrigPrimDigiCollection> hcalTPGs;
+   
+   
   if(!evt.getByToken(ecalSrc_, ecalTPGs))
     std::cout<<"ERROR GETTING THE ECAL TPGS"<<std::endl;
   if(!evt.getByToken(hcalSrc_, hcalTPGs))
@@ -258,13 +262,52 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
       if(abs(rlxTau->eta()) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(tempJet);
     }
   }
+  else if(evt.getByToken(l1GctTauSource_, l1GctTaus)){
+    std::cout<<"found gct taus size: "<< l1GctTaus->size() <<std::endl;
+    for(vector<L1GctJetCand>::const_iterator gctTau = l1GctTaus->begin(); gctTau != l1GctTaus->end(); gctTau++) {
+      //L1CaloRegion region = L1CaloRegion( gctTau->rank(), false, gctTau->regionId().rctCrate(), gctTau->regionId().rctRegion());
+      
+      //UCTRegionProcess uctRegion(region);
+      float pt = gctTau->rank();
+      float eta = convertRCTEta(gctTau->regionId().ieta());
+      float phi = convertRCTPhi(gctTau->regionId().iphi());
+      //std::cout<<"rank "<<gctTau->rank()<<" gctEta "<<gctTau->regionId().ieta()<<" gctPhi "<<gctTau->regionId().iphi()<<std::endl;
+
+      if(gctTau->regionId().ieta()>17 || gctTau->regionId().ieta()<4) continue;
+      if(gctTau->regionId().iphi()>19){std::cout<<"region phi is out of bounds!!"<<std::endl; continue;}
+      
+      if(gctTau->rank()>0){
+ 	//std::cout<<"rank "<<gctTau->rank()<<" gctEta "<<gctTau->regionId().ieta()<<" gctPhi "<<gctTau->regionId().iphi()<<std::endl;
+        //std::cout<<" pt "<<pt<< " eta "<< eta<< " phi "<<phi<<std::endl;
+	
+	reco::LeafCandidate::PolarLorentzVector tempLorentz;
+	tempLorentz.SetPt(pt);
+	tempLorentz.SetEta(eta);
+	tempLorentz.SetPhi(phi);
+
+	//std::cout<<"temp lorentz pt  "<<pt<<std::endl;
+	//std::cout<<"temp lorentz eta "<<eta<<std::endl;
+	//std::cout<<"temp lorentz phi "<<phi<<std::endl;
+	
+	l1extra::L1JetParticle tempJet(tempLorentz);
+	//std::cout<<"temp jet pt  "<<tempJet.pt()<<std::endl;
+	//std::cout<<"temp jet eta "<<tempJet.eta()<<std::endl;
+	//std::cout<<"temp jet phi "<<tempJet.phi()<<std::endl;
+
+	rlxTauSorted.push_back(tempJet);
+	if(abs(eta) < 2.4) rlxTauSortedEtaRestricted2p4.push_back(tempJet);
+	if(abs(eta) < 2.1) rlxTauSortedEtaRestricted2p1.push_back(tempJet);
+      }
+    }
+  }
   //else
   //std::cout<<"did not get relaxed taus"<<std::endl;
   
   std::sort(rlxTauSorted.begin(),rlxTauSorted.end(),compareByPt);
   std::sort(rlxTauSortedEtaRestricted2p4.begin(),rlxTauSortedEtaRestricted2p4.end(),compareByPt);
   std::sort(rlxTauSortedEtaRestricted2p1.begin(),rlxTauSortedEtaRestricted2p1.end(),compareByPt);
-  std::cout<<"making taus"<<std::endl;
+  std::cout<<"rlxTauSorted size "<<rlxTauSorted.size() <<std::endl;
+
 
   //Begin Making Rate Plots
   for( auto rlxTau : rlxTauSorted ) {
@@ -273,7 +316,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     else tau_pt->Fill( rlxTau.pt() );
     tau_eta->Fill( rlxTau.eta() );
     tau_phi->Fill( rlxTau.phi() );
-    //std::cout<<"rlx tau pt "<< rlxTau->pt() << " rlx tau eta "<< rlxTau->eta()<<" rlx tau phi "<< rlxTau->phi()<<std::endl;
+    std::cout<<"rlx tau pt "<< rlxTau.pt() << " rlx tau eta "<< rlxTau.eta()<<" rlx tau phi "<< rlxTau.phi()<<std::endl;
   }
 
   if(rlxTauSorted.size()>1)
@@ -347,7 +390,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
     for(vector<L1CaloRegion>::const_iterator region = regions->begin(); region != regions->end(); ++region){
       UCTRegionProcess uctRegion(*region);
       if(region->et()>0){
-	float pt = (region->et());
+ 	float pt = (region->et());
 	
 	float eta = uctRegion.getFineRecoEta();
 	
@@ -365,7 +408,7 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
 
   //If there isn't at least 1 good reco tau don't bother doing all the work
   if(goodTaus.size()>0){
-    double deltaR_ = 0.5;
+    double deltaR_ = 1;
     
     ////Make TPG Maps
     //ecal
@@ -413,20 +456,31 @@ void L1TRatesAndEff::analyze( const Event& evt, const EventSetup& es )
 	  break;
 	}
       }
-      for(uint32_t k = 0; k<rlxTauSorted.size(); k++){
-	double dR = deltaR( recoTau.p4(), rlxTauSorted.at(k).p4());
+      std::cout<<"rlxTauSorted size "<<rlxTauSorted.size() <<std::endl;
+
+      for( auto rlxTau : rlxTauSorted ) {
+	std::cout<<"rlx tau pt "<< rlxTau.pt() << " rlx tau eta "<< rlxTau.eta()<<" rlx tau phi "<< rlxTau.phi()<<std::endl;
+	double dR = deltaR( recoTau.p4(), rlxTau.p4());
 	if(dR < deltaR_){
-	  rlxTauPt  = rlxTauSorted.at(k).pt();
-	  rlxTauEta = rlxTauSorted.at(k).eta();
-	  rlxTauPhi = rlxTauSorted.at(k).phi();
+	  rlxTauPt  = rlxTau.pt();
+	  rlxTauEta = rlxTau.eta();
+	  rlxTauPhi = rlxTau.phi();
+	  std::cout<< "rlxTauPt" << rlxTauPt <<" rlxTauEta "<< rlxTauEta<<"rlxTauPhi"<<rlxTauPhi<< " DR "<< dR<<std::endl;
 	  l1RlxMatched = 1;
 	  break;
 	}
       }
       
-      if(l1RlxMatched==0)
+      /*
+      if(l1RlxMatched<1){
 	std::cout<<"Not Matched!"<<std::endl;
-      std::cout<<"nvtx "<<nvtx<<std::endl;
+	std::cout<<"recoPt "<<recoPt<< " recoEta "<< recoEta<< " recoPhi "<<recoPhi<<std::endl;
+      }
+      else{
+	std::cout<<"Matched"<<std::endl;
+	std::cout<<"recoPt "<<recoPt<< " recoEta "<< recoEta<< " recoPhi "<<recoPhi<<std::endl;
+	std::cout<< "rlxTauPt" << rlxTauPt <<" rlxTauEta "<< rlxTauEta<<"rlxTauPhi"<<rlxTauPhi<<std::endl;
+	}*/
       efficiencyTree->Fill();
     }
     

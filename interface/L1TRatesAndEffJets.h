@@ -144,6 +144,8 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
   edm::EDGetTokenT<vector<pat::Jet> > jetSrcAK8_;
   edm::EDGetTokenT<BXVector <l1t::Jet> > stage1JetSource_;
   edm::EDGetTokenT<BXVector <l1t::Jet> > stage2JetSource_;
+  edm::EDGetTokenT<vector <L1GctJetCand> > l1GctJetSource_;
+  edm::EDGetTokenT<vector <L1GctJetCand> > l1GctForJetSource_;
   edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraJets_;
 
   std::string folderName_;
@@ -250,6 +252,59 @@ class L1TRatesAndEffJets : public edm::EDAnalyzer {
     return -9;
   }
 
+  float convertRCTEta(uint32_t inputEta) {
+    const double regionEtaValues[22] = {
+      -4.75,
+      -4.25,
+      -3.75,
+      -3.25,
+      -2.5,
+      -1.93,
+      -1.566,
+      -1.218,
+      -0.87,
+      -0.522,
+      -0.174,
+      0.174,
+      0.522,
+      0.87,
+      1.218,
+      1.566,
+      1.93,
+      2.5,
+      3.25,
+      3.75,
+      4.25,
+      4.75
+    };
+    return regionEtaValues[inputEta];
+  };
+
+
+
+  float convertRCTPhi(uint32_t inputPhi) {
+    const double regionPhiValues[20] = {
+      0.000,
+      0.349,
+      0.698,
+      1.047,
+      1.396,
+      1.744,
+      2.093,
+      2.442,
+      2.791,
+      -3.14159,
+      -2.791,
+      -2.442,
+      -2.093,
+      -1.744,
+      -1.396,
+      -1.047,
+      -0.698,
+      -0.349
+    };
+    return regionPhiValues[inputPhi];
+  };
 
 };
 

@@ -5,6 +5,8 @@
 # with command line options: l1Ntuple -s RAW2DIGI --era=Run2_2016 --geometry=Extended2016,Extended2016Reco --customise=L1Trigger/Configuration/customiseReEmul.L1TEventSetupForHF1x1TPs --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleEMU --customise=L1Trigger/Configuration/customiseUtils.L1TTurnOffUnpackStage2GtGmtAndCalo --conditions=auto:run2_data -n 100 --data --no_exec --no_output --filein=/store/data/Run2015D/ZeroBias1/RAW/v1/000/256/843/00000/FE8AD1BB-D05E-E511-B3A7-02163E01276B.root
 import FWCore.ParameterSet.Config as cms
 
+import EventFilter.L1TXRawToDigi.util as util
+
 from Configuration.StandardSequences.Eras import eras
 
 process = cms.Process('RAW2DIGI',eras.Run2_2016)
@@ -90,14 +92,21 @@ from L1Trigger.L1TCaloLayer1.simCaloStage2Layer1Digis_cfi import simCaloStage2La
 from L1Trigger.L1TCalorimeter.simCaloStage2Digis_cfi import simCaloStage2Digis
 
 if options.jets is True :
-    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffStage2Jets_cfi")
+    process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffLegacyJets_cfi")
+    process.l1NtupleProducer.folderName = cms.untracked.string("LegacyJets")
+    process.l1NtupleProducer.gctJets = cms.InputTag("gctDigis","cenJets")
+    process.l1NtupleProducer.gctForJets = cms.InputTag("gctDigis","forJets")
+    process.l1NtupleProducer.stage2JetSource    = cms.InputTag("caloStage2Digis","garbage")
+
+
 else :
     process.load("L1Trigger.Stage3Ntuplizer.l1RatesEffLegacy_cfi")
+    process.l1NtupleProducer.folderName = cms.untracked.string("LegacyTaus")
+    process.l1NtupleProducer.gctTauJets = cms.InputTag("gctDigis","tauJets")
+
 
 process.l1NtupleProducer.ecalDigis = cms.InputTag("ecalDigis","EcalTriggerPrimitives")
 process.l1NtupleProducer.hcalDigis = cms.InputTag("simHcalTriggerPrimitiveDigis")
-process.l1NtupleProducer.folderName = cms.untracked.string("LegacyTaus")
-process.l1NtupleProducer.gctTauJets = cms.InputTag("gctDigis","tauJets")
 #"gctDigis"                  "tauJets"         "RAW2DIGI"
 process.simDtTriggerPrimitiveDigis.digiTag = 'muonDTDigis'  
 process.simCscTriggerPrimitiveDigis.CSCComparatorDigiProducer = cms.InputTag( 'muonCSCDigis', 
@@ -120,7 +129,7 @@ process.gctDigis = cms.EDProducer("L1GctEmulator",
                                   hardwareTest = cms.bool(False),
                                   writeInternalData = cms.bool(False),
                                   useImprovedTauAlgorithm = cms.bool(True),
-                                  ignoreRCTTauVetoBitsForIsolation = cms.bool(False),
+                                  ignoreRCTTauVetoBitsForIsolation = cms.bool(True),
                                   inputLabel = cms.InputTag("caloStage1Digis"),
                                   preSamples = cms.uint32(1),
                                   postSamples = cms.uint32(1),
@@ -151,7 +160,7 @@ process.TFileService = cms.Service(
 	fileName = cms.string("l1TNtuple.root")
 )
 
-process.p = cms.Path(process.RawToDigi*process.simHcalTriggerPrimitiveDigis * process.SimL1Emulator * process.gctDigis * process.l1NtupleProducer)
+process.p = cms.Path(process.RawToDigi*process.simHcalTriggerPrimitiveDigis * process.SimL1TCalorimeter * process.gctDigis * process.l1NtupleProducer)
 
 
 #process.out = cms.OutputModule("PoolOutputModule",
